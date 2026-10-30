@@ -29,7 +29,7 @@
   --navy:#2a5aa8; --ink:#4a5a7c; --muted:#8193b6;
   --pink:#f27fa5; --pink-d:#e8628d; --blue:#5b9be6; --yellow:#f7c548; --green-wa:#3fc56b;
   --card-blue:#dcedfb; --card-pink:#fde1ea; --card-yel:#fdf0c9; --card-lil:#ece5fb;
-  --lh: calc(clamp(640px, 100vw, 1800px) / 3);   /* alto del paisaje de portada */
+  --lh: calc(clamp(780px, 100vw, 1800px) / 3);   /* alto del paisaje de portada */
   --mh: calc(clamp(700px, 100vw, 1800px) / 3);   /* alto de la pradera del juego */
   --pad: clamp(18px, 5vw, 40px);
 }
@@ -65,7 +65,16 @@ button,input,select{font:inherit;color:inherit}
 .side svg{aspect-ratio:50/110}
 .side.l{left:-6px;transform:rotate(38deg);transform-origin:bottom left}
 .side.r{right:-6px;transform:scaleX(-1) rotate(38deg);transform-origin:bottom right}
-.paused .cloud,.paused .sway,.paused .petal,.paused .lf{animation-play-state:paused}
+.paused .cloud,.paused .sway,.paused .petal,.paused .lf,.paused .esq{animation-play-state:paused}
+.esq{position:absolute;z-index:1;pointer-events:none;height:auto;max-width:none;animation:esqL 7s ease-in-out infinite}
+.esq.tl{top:-2px;left:-2px;width:clamp(96px,26vw,230px);transform-origin:0 0}
+.esq.tr{top:-2px;right:-2px;width:clamp(96px,26vw,230px);transform-origin:100% 0;animation-name:esqR}
+.esq.bl{bottom:26px;left:-2px;width:clamp(120px,33vw,270px);transform-origin:0 100%;animation-name:esqR}
+.esq.br{bottom:26px;right:-2px;width:clamp(120px,33vw,270px);transform-origin:100% 100%}
+@keyframes esqL{0%,100%{transform:rotate(0)}50%{transform:rotate(1.4deg)}}
+@keyframes esqR{0%,100%{transform:rotate(0)}50%{transform:rotate(-1.4deg)}}
+.countdown .wrap,.countdown .cd,.countdown .cd-done{position:relative;z-index:5}
+.info .wrap,.rsvp .wrap{position:relative;z-index:5}
 .sway{animation:sway 5s ease-in-out infinite;transform-origin:bottom center}
 @keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
 
@@ -82,7 +91,7 @@ button,input,select{font:inherit;color:inherit}
 @keyframes drift{from{transform:translateX(-260px)}to{transform:translateX(calc(100vw + 40px))}}
 
 /* Banderines: cuelgan de cada esquina en cualquier pantalla */
-.garland{position:absolute;top:env(safe-area-inset-top,0px);z-index:4;width:clamp(160px,46vw,320px);
+.garland{position:absolute;top:env(safe-area-inset-top,0px);z-index:4;width:clamp(130px,34vw,280px);
   pointer-events:none}
 .garland svg{display:block;width:100%;height:auto;overflow:visible}
 .garland.left{left:0}
@@ -114,7 +123,7 @@ button,input,select{font:inherit;color:inherit}
   height:max(min(var(--lh), 44vh), calc(var(--pw) * .95 + var(--ground)))}
 .scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18px;background:#a1ca66;z-index:0}
 .landscape{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  width:clamp(640px,100vw,1800px);max-width:none;z-index:0;pointer-events:none}
+  width:clamp(780px,100vw,1800px);max-width:none;z-index:0;pointer-events:none}
 .stand{position:absolute;z-index:1;width:var(--pw)}
 .stand::after{content:"";position:absolute;left:18%;right:18%;bottom:-6px;height:16px;border-radius:50%;
   background:radial-gradient(ellipse at center, rgba(56,98,52,.32), rgba(56,98,52,0) 70%);z-index:-1}
@@ -200,19 +209,21 @@ button,input,select{font:inherit;color:inherit}
 .play{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--play-bg) 0%,#fff9f6 55%,#eef8ff 100%);
   --mh: calc(clamp(980px, 100vw, 1800px) / 3);
   --grass: max(calc(var(--mh) * .13), 40px);
-  padding-top:clamp(30px,6vw,50px);padding-bottom:var(--grass);min-height:calc(var(--mh) * 1.15)}
+  --aw: clamp(220px, 58vw, 540px);
+  min-height:max(calc(var(--mh) * .95), calc(var(--grass) + var(--aw) * .72 + 24px));
+  padding-top:clamp(28px,6vw,48px)}
 .meadow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:clamp(980px,100vw,1800px);max-width:none;z-index:0;pointer-events:none}
-.play-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;align-items:end;column-gap:clamp(0px,2vw,24px);min-height:calc(var(--mh) * 1.15 - var(--grass) - clamp(30px,6vw,50px))}
-.play-copy{grid-column:1;grid-row:1;align-self:start;text-align:center;display:flex;flex-direction:column;align-items:center;padding-top:clamp(0px,2vw,20px);position:relative;z-index:2}
-.play-title{color:var(--navy);font-family:"Baloo 2","Fredoka",sans-serif;font-weight:800;line-height:1;font-size:clamp(21px,5.6vw,44px);display:flex;flex-direction:column;align-items:center}
-.play-title .line{display:flex;align-items:center;gap:.08em}
-.play-title .line + .line{margin-top:-.1em}
-.play-title .spark{width:.75em;height:.75em}
-.play-copy p{margin:.4em 0 .8em;font-size:clamp(13px,3.4vw,18px);max-width:17em}
-.play-art{grid-column:2;grid-row:1;justify-self:end;align-self:end;width:min(135%,560px);margin-right:calc(var(--pad) * -.5);margin-left:-20%}
+.petals{position:absolute;inset:0;z-index:1;pointer-events:none}
+.play-wrap{position:static}
+.play-copy{position:relative;z-index:3;width:min(56%,500px);display:flex;flex-direction:column;align-items:center;text-align:center}
+.play-title{color:var(--navy);font-family:"Baloo 2","Fredoka",sans-serif;font-weight:800;line-height:1;
+  font-size:clamp(20px,5.2vw,42px);display:flex;flex-direction:column;align-items:center}
+.play-title .arc + .arc{margin-top:-.08em}
+.play-copy p{margin:.45em 0 .85em;font-size:clamp(13px,3.5vw,18px);line-height:1.4;max-width:16em}
+.play-art{position:absolute;z-index:2;bottom:var(--grass);right:max(0px, calc((100vw - 980px) / 2));width:var(--aw)}
 .play-art .stand{position:relative;width:100%}
-.petal{position:absolute;z-index:1;width:var(--s,18px);height:var(--s,18px);opacity:.9;animation:float var(--d,7s) ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(40deg)}}
+.petal{position:absolute;width:var(--s,18px);height:var(--s,18px);opacity:.95;animation:float var(--d,7s) ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(30deg)}}
 
 /* ═════════ CONFIRMACIÓN ═════════ */
 .rsvp{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--pink-bg),#fff3f7);padding:clamp(38px,8vw,60px) 0 clamp(110px,24vw,150px);text-align:center}
@@ -413,15 +424,12 @@ button,input,select{font:inherit;color:inherit}
 
 <!-- ═════════ CUENTA REGRESIVA ═════════ -->
 <section class="countdown" id="cuenta" aria-labelledby="t-cd">
-  <svg class="cloud" style="top:10%;width:110px;fill:#fff;opacity:.6;animation-duration:110s;animation-delay:-30s" viewBox="0 0 160 100" aria-hidden="true"><use href="#cloud3"/></svg>
-  <div class="side l" style="bottom:46%"><svg class="sway" aria-hidden="true"><use href="#stem-y"/></svg></div>
-  <div class="side r" style="bottom:42%"><svg class="sway" style="animation-delay:-2s" aria-hidden="true"><use href="#stem"/></svg></div>
-  <div class="corner l"><svg class="sway" aria-hidden="true"><use href="#cluster"/></svg></div>
-  <div class="corner r"><svg class="sway" style="animation-delay:-1.6s" aria-hidden="true"><use href="#cluster"/></svg></div>
+  <img class="esq tl" src="assets/img/esquina-superior-izquierda.png" alt="" aria-hidden="true">
+  <img class="esq br" src="assets/img/esquina-inferior-derecha.png" alt="" aria-hidden="true">
   <div class="wrap">
     <h2 id="t-cd" class="sec-title" aria-label="Cuenta regresiva">
       <svg class="spark" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg>
-      <span class="arc" data-bend=".012">Cuenta regresiva</span>
+      <span class="arc" data-bend=".005">Cuenta regresiva</span>
       <svg class="spark r" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg>
     </h2>
   </div>
@@ -442,18 +450,12 @@ button,input,select{font:inherit;color:inherit}
   <svg class="cloud soft" style="top:38%;width:100px;animation-duration:85s;animation-delay:-50s" viewBox="0 0 160 100" aria-hidden="true"><use href="#cloud3"/></svg>
   <svg class="cloud soft" style="top:55%;width:150px;animation-duration:115s;animation-delay:-10s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
   <svg class="cloud soft" style="top:70%;width:90px;animation-duration:100s;animation-delay:-65s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
-  <svg class="deco bush-l" viewBox="-6 -6 232 146" aria-hidden="true"><use href="#bush"/></svg>
-  <svg class="deco bush-r" viewBox="-6 -6 232 146" aria-hidden="true"><use href="#bush"/></svg>
-  <div class="side l" style="bottom:52%"><svg class="sway" aria-hidden="true"><use href="#stem"/></svg></div>
-  <div class="side r" style="bottom:56%"><svg class="sway" style="animation-delay:-1.2s" aria-hidden="true"><use href="#stem-y"/></svg></div>
-  <div class="side l" style="bottom:36%;width:clamp(24px,6vw,40px)"><svg class="sway" style="animation-delay:-2.4s" aria-hidden="true"><use href="#stem-y"/></svg></div>
-  <div class="side r" style="bottom:32%;width:clamp(24px,6vw,40px)"><svg class="sway" style="animation-delay:-.6s" aria-hidden="true"><use href="#stem"/></svg></div>
-  <div class="corner l" style="bottom:30px"><svg class="sway" aria-hidden="true"><use href="#cluster"/></svg></div>
-  <div class="corner r" style="bottom:30px"><svg class="sway" style="animation-delay:-2s" aria-hidden="true"><use href="#cluster"/></svg></div>
+  <img class="esq tr" src="assets/img/esquina-superior-derecha.png" alt="" aria-hidden="true">
+  <img class="esq bl" src="assets/img/esquina-inferior-izquierda.png" alt="" aria-hidden="true">
   <div class="wrap">
     <h2 id="t-info" class="sec-title" aria-label="Fecha y lugar">
       <svg class="spark" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
-      <span class="arc" data-bend=".012">Fecha y lugar</span>
+      <span class="arc" data-bend=".005">Fecha y lugar</span>
       <svg class="spark r" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
     </h2>
     <div class="info-card">
@@ -489,16 +491,17 @@ button,input,select{font:inherit;color:inherit}
 <!-- ═════════ JUEGO ═════════ -->
 <section class="play" aria-labelledby="t-play">
   <img class="meadow" src="assets/img/pradera-juego.png" alt="" onerror="this.classList.add('slot-missing')">
-  <svg class="petal" style="left:6%;top:16%;--s:16px;--d:6s" aria-hidden="true"><use href="#daisy"/></svg>
-  <svg class="petal" style="left:44%;top:10%;--s:20px;--d:8s;animation-delay:-2s" aria-hidden="true"><use href="#daisy"/></svg>
-  <svg class="petal" style="right:8%;top:14%;--s:18px;--d:7s;animation-delay:-4s" aria-hidden="true"><use href="#daisy"/></svg>
-  <svg class="petal" style="right:30%;top:34%;--s:14px;--d:9s;animation-delay:-1s" aria-hidden="true"><use href="#daisy"/></svg>
-  <svg class="petal" style="left:3%;top:52%;--s:14px;--d:7.5s;animation-delay:-3s" aria-hidden="true"><use href="#daisy"/></svg>
-  <div class="wrap play-grid">
+  <div class="petals" aria-hidden="true">
+    <svg class="petal" style="right:5%;top:7%;--s:clamp(22px,6vw,34px);--d:7s"><use href="#daisy"/></svg>
+    <svg class="petal" style="right:27%;top:15%;--s:clamp(18px,5vw,28px);--d:8.5s;animation-delay:-2s"><use href="#daisy"/></svg>
+    <svg class="petal" style="left:60%;top:5%;--s:clamp(20px,5.4vw,30px);--d:7.5s;animation-delay:-4s"><use href="#daisy"/></svg>
+    <svg class="petal" style="right:10%;top:27%;--s:clamp(16px,4.4vw,24px);--d:9s;animation-delay:-1s"><use href="#daisy"/></svg>
+  </div>
+  <div class="wrap play-wrap">
     <div class="play-copy">
       <h2 id="t-play" class="play-title" aria-label="Una pequeña aventura para jugar">
-        <span class="line"><span class="arc" data-bend=".012">Una pequeña aventura</span><svg class="spark r" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg></span>
-        <span class="line"><svg class="spark" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg><span class="arc" data-bend=".012" data-accent="jugar">para jugar</span></span>
+        <span class="arc" data-bend=".005">Una pequeña aventura</span>
+        <span class="arc" data-bend=".005" data-accent="jugar">para jugar</span>
       </h2>
       <p>Salta los regalos, atrapa globos y llega a la fiesta.</p>
       <button class="btn btn-yel" id="btn-play" type="button">
@@ -516,16 +519,12 @@ button,input,select{font:inherit;color:inherit}
 <!-- ═════════ CONFIRMACIÓN ═════════ -->
 <section class="rsvp" aria-labelledby="t-rsvp">
   <svg class="cloud" style="top:8%;width:120px;fill:#fff;opacity:.55;animation-duration:120s;animation-delay:-40s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
-  <svg class="deco bush-l" viewBox="-6 -6 232 146" aria-hidden="true"><use href="#bush"/></svg>
-  <svg class="deco bush-r" viewBox="-6 -6 232 146" aria-hidden="true"><use href="#bush"/></svg>
-  <div class="side l" style="bottom:50%"><svg class="sway" aria-hidden="true"><use href="#stem-y"/></svg></div>
-  <div class="side r" style="bottom:46%"><svg class="sway" style="animation-delay:-1.8s" aria-hidden="true"><use href="#stem"/></svg></div>
-  <div class="corner l" style="bottom:30px"><svg class="sway" aria-hidden="true"><use href="#cluster"/></svg></div>
-  <div class="corner r" style="bottom:30px"><svg class="sway" style="animation-delay:-2.2s" aria-hidden="true"><use href="#cluster"/></svg></div>
+  <img class="esq tl" src="assets/img/esquina-superior-izquierda.png" alt="" aria-hidden="true">
+  <img class="esq br" src="assets/img/esquina-inferior-derecha.png" alt="" aria-hidden="true">
   <div class="wrap">
     <h2 id="t-rsvp" class="sec-title" aria-label="Confirma tu asistencia">
       <svg class="spark" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
-      <span class="arc" data-bend=".012">Confirma tu asistencia</span>
+      <span class="arc" data-bend=".005">Confirma tu asistencia</span>
       <svg class="spark r" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
     </h2>
     <p class="lead">Nos encantaría compartir este día tan especial contigo. ¡Te esperamos!</p>
@@ -639,7 +638,7 @@ var EVENTO = {
     var p = document.createElementNS(NS,'path');
     p.setAttribute('d', d);
     p.style.fill = svg.getAttribute('data-c');
-    p.setAttribute('stroke','rgba(255,255,255,.75)'); p.setAttribute('stroke-width','8');
+    p.setAttribute('stroke','#eef6fc'); p.setAttribute('stroke-width','8');
     p.setAttribute('stroke-linejoin','round'); p.setAttribute('paint-order','stroke');
     svg.appendChild(p);
   }
@@ -729,22 +728,24 @@ var EVENTO = {
   var song = document.getElementById('song'), btn = document.getElementById('music'), tip = document.getElementById('music-tip'), fade;
   setTimeout(function(){ tip.classList.add('hide'); }, 5000);
   function setOn(on){ btn.classList.toggle('on', on); btn.setAttribute('aria-pressed', on); btn.setAttribute('aria-label', on ? 'Pausar música' : 'Reproducir música'); }
+  /* Fundido por pasos fijos: siempre termina, aunque el celular ignore el volumen */
   function fadeTo(v, done){
     clearInterval(fade);
+    var from = song.volume, n = 0, steps = 8;
     fade = setInterval(function(){
-      var d = v - song.volume;
-      if (Math.abs(d) < .05){ song.volume = v; clearInterval(fade); if (done) done(); return; }
-      song.volume = Math.min(1, Math.max(0, song.volume + (d > 0 ? .05 : -.05)));
-    }, 40);
+      n++;
+      try{ song.volume = Math.max(0, Math.min(1, from + (v - from) * n/steps)); }catch(e){}
+      if (n >= steps){ clearInterval(fade); if (done) done(); }
+    }, 35);
   }
   btn.addEventListener('click', function(){
     tip.classList.add('hide');
     if (song.paused){
-      song.volume = 0;
+      try{ song.volume = 0; }catch(e){}
       var pr = song.play();
       if (pr && pr.then) pr.then(function(){ setOn(true); fadeTo(.7); }).catch(function(){ setOn(false); });
       else { setOn(true); fadeTo(.7); }
-    } else { setOn(false); fadeTo(0, function(){ song.pause(); }); }
+    } else { setOn(false); fadeTo(0, function(){ song.pause(); try{ song.volume = .7; }catch(e){} }); }
   });
   song.addEventListener('error', function(){ document.querySelector('.music-wrap').style.display='none'; });
 })();
@@ -836,8 +837,8 @@ var EVENTO = {
   }
   var SPR={};
   function load(k,src){ var im=new Image(); im.onload=function(){ SPR[k]=trim(im); if(k==='mareado') veilImg.src=src; }; im.src=src; }
-  load('corre1','assets/img/jugador-corre-1.png'); load('corre2','assets/img/jugador-corre-2.png');
-  load('salta','assets/img/jugador-salta.png'); load('mareado','assets/img/jugador-mareado.png');
+  load('corre1','assets/img/jugador-patineta.png');
+  load('salta','assets/img/jugador-patineta-salta.png'); load('mareado','assets/img/jugador-mareado.png');
   var meadow=new Image(); meadow.src='assets/img/pradera-juego.png';
 
   var W=0,H=0,GROUND=0,PH=60,dpr=1;
@@ -901,10 +902,10 @@ var EVENTO = {
     for (var x=-off-28; x<=W+28; x+=14) ctx.quadraticCurveTo(x+7, top-3, x+14, top);
     ctx.lineTo(W+30,H); ctx.closePath(); ctx.fill();
   }
-  function sprite(k,x,h){
-    var s=SPR[k]||SPR.corre1;
-    if (!s){ ctx.fillStyle='#78aef0'; rr(x,GROUND-h+p.y,h*.8,h,14); ctx.fill(); return; }
-    ctx.drawImage(s, x, GROUND-h+p.y, h*s.width/s.height, h);
+  function sprite(k,x,h,bob){
+    var s=SPR[k]||SPR.corre1, y=GROUND-h+p.y+(bob||0);
+    if (!s){ ctx.fillStyle='#78aef0'; rr(x,y,h*.8,h,14); ctx.fill(); return; }
+    ctx.drawImage(s, x, y, h*s.width/s.height, h);
   }
 
   function frame(now){ raf=requestAnimationFrame(frame); var dt=Math.min(.033,(now-last)/1000||0); last=now; if(state==='play') update(dt); draw(); }
@@ -962,7 +963,7 @@ var EVENTO = {
     p.x=Math.max(24,W*.1);
     var sh=Math.max(.45, 1 + p.y/(H*.7));
     ctx.fillStyle='rgba(60,110,50,.22)'; ctx.beginPath(); ctx.ellipse(p.x+PH*.4,GROUND+1,PH*.32*sh,PH*.06*sh,0,0,7); ctx.fill();
-    if (state==='over') sprite('mareado',p.x,PH); else if (!p.ground) sprite('salta',p.x,PH); else sprite(Math.floor(t/.11)%2?'corre2':'corre1',p.x,PH);
+    if (state==='over') sprite('mareado',p.x,PH); else if (!p.ground) sprite('salta',p.x,PH); else sprite('corre1',p.x,PH,-Math.abs(Math.sin(t*16))*PH*.018);
     for (i=0;i<bits.length;i++){ var q=bits[i]; ctx.globalAlpha=Math.max(0,q.life/.7); ctx.fillStyle=q.c; ctx.beginPath(); ctx.arc(q.x,q.y,q.r,0,7); ctx.fill(); }
     ctx.globalAlpha=1;
     ctx.font='800 '+Math.round(PH*.32)+'px "Baloo 2", sans-serif'; ctx.textAlign='center';
