@@ -5,12 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>¡Majo cumple 1! · Invitación</title>
 <meta name="description" content="Ven a celebrar el primer añito de Majo. Domingo 8 de noviembre, 2:30 pm.">
-<meta name="theme-color" content="#bfe6ff">
+<meta name="theme-color" content="#a9dcff">
+<link rel="icon" type="image/png" href="assets/favicon/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://diegoleongarcia.github.io/majo-cumple-1/">
 <meta property="og:title" content="¡Majo cumple 1!">
 <meta property="og:description" content="Ven a celebrar su primer añito · Domingo 8 de noviembre, 2:30 pm">
+<meta property="og:image" content="https://diegoleongarcia.github.io/majo-cumple-1/assets/open_graph_image/open_graph_image.png">
+<meta property="og:image:alt" content="Invitación al primer cumpleaños de Majo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://diegoleongarcia.github.io/majo-cumple-1/assets/open_graph_image/open_graph_image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme: light;
@@ -41,12 +49,14 @@ button,input,select{font:inherit;color:inherit}
 
 /* ── Títulos de sección con chispitas ── */
 .sec-title{
-  display:flex;align-items:center;justify-content:center;gap:.5em;
-  color:var(--navy);font-size:clamp(26px,6.4vw,40px);text-align:center;
-  text-shadow:0 .06em 0 #fff, .05em 0 0 #fff, -.05em 0 0 #fff, 0 -.05em 0 #fff;
+  display:flex;align-items:center;justify-content:center;gap:.35em;
+  color:var(--navy);font-size:clamp(30px,7.6vw,46px);text-align:center;
+  font-family:"Baloo 2","Fredoka",sans-serif;font-weight:800;line-height:1.1;
 }
-.sec-title svg{width:.9em;height:.9em;flex:none}
-.sec-title svg:last-child{transform:scaleX(-1)}
+.arc{display:inline-block;max-width:100%;font:inherit;color:inherit}
+.arc svg{display:block;height:auto;max-width:100%;overflow:visible;filter:drop-shadow(0 3px 4px rgba(29,79,174,.12))}
+.sec-title > svg{width:.75em;height:.75em;flex:none}
+.sec-title > svg:last-child{transform:scaleX(-1)}
 
 /* ── Borde de nube entre secciones ── */
 .edge{
@@ -86,6 +96,11 @@ button,input,select{font:inherit;color:inherit}
 @keyframes twinkle{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(18deg) scale(1.08)}}
 
 .hero-copy{position:relative;z-index:5;padding:0 var(--pad)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hero-title svg{display:block;width:min(100%,640px);height:auto;margin:0 auto;overflow:visible;
+  filter:drop-shadow(0 6px 10px rgba(29,79,174,.14))}
+.one-hop{animation:hop2 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes hop2{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .kicker{color:var(--navy);font-size:clamp(22px,5.6vw,34px);font-weight:600;
   text-shadow:0 .07em 0 #fff,.06em 0 0 #fff,-.06em 0 0 #fff,0 -.06em 0 #fff}
 
@@ -130,7 +145,7 @@ button,input,select{font:inherit;color:inherit}
   min-height:var(--lh);
   display:flex;align-items:flex-end;justify-content:center;
   padding-bottom:calc(var(--lh) * .13);
-  margin-top:clamp(14px,3vw,26px);
+  margin-top:clamp(-4px,-1vw,0px);
 }
 .landscape{
   position:absolute;bottom:0;left:50%;transform:translateX(-50%);
@@ -201,8 +216,10 @@ button,input,select{font:inherit;color:inherit}
   padding:clamp(36px,7vw,56px) 0 0}
 .play .edge.top{--c:#fff4f0}
 .play-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:clamp(6px,2vw,24px)}
-.play h2{color:var(--navy);font-size:clamp(25px,6.4vw,42px);text-align:left}
-.play h2 em{font-style:normal;color:var(--pink-d)}
+.play-title{color:var(--navy);font-family:"Baloo 2","Fredoka",sans-serif;font-weight:800;line-height:1.05;font-size:clamp(27px,6.8vw,46px);display:flex;flex-direction:column;align-items:center}
+.play-title{grid-column:1/-1}
+.play-title .arc + .arc{margin-top:-.3em}
+.play-copy{text-align:center}
 .play p{margin:.6em 0 1.1em;font-size:clamp(14px,3.6vw,18px)}
 .play-art{position:relative}
 .play-art img{width:100%;animation:bob 3.6s ease-in-out infinite;animation-delay:-1s;
@@ -225,10 +242,42 @@ button,input,select{font:inherit;color:inherit}
 .form .btn{margin-top:8px;width:100%}
 .form-msg{min-height:1.4em;font-weight:700;color:var(--pink-d);text-align:center;font-size:15px}
 
-footer{background:#fff3f7;text-align:center;padding:18px var(--pad) calc(22px + env(safe-area-inset-bottom,0px));
-  font-size:14px;color:#8a97b5}
-footer a{color:var(--navy);font-weight:800;text-decoration:none}
-footer svg{width:12px;height:12px;vertical-align:-1px;margin:0 .4em}
+.brand{
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px 22px;
+  background:linear-gradient(180deg,#5aa6ff,#2f74e0);color:#fff;
+  padding:20px var(--pad) calc(22px + env(safe-area-inset-bottom,0px));
+  border-radius:26px 26px 0 0;margin-top:-18px;position:relative;z-index:2;
+  font-family:"Fredoka",sans-serif;font-weight:500;font-size:clamp(15px,3.8vw,17px);letter-spacing:.02em
+}
+.brand b{font-weight:700}
+.brand p a{color:#fff;text-decoration:none;font-weight:600;border-bottom:2px solid rgba(255,255,255,.4)}
+.brand p span{opacity:.6;margin:0 .3em}
+.social{display:flex;gap:10px}
+.social a{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.75);color:#fff;
+  display:grid;place-items:center;transition:background .15s, transform .15s}
+.social a:hover,.social a:focus-visible{background:rgba(255,255,255,.18);transform:translateY(-2px)}
+.social svg{width:20px;height:20px}
+
+.music-wrap{position:fixed;z-index:40;right:max(14px,env(safe-area-inset-right,0px));
+  bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px}
+.music{width:60px;height:60px;border-radius:50%;border:4px solid #fff;cursor:pointer;
+  background:linear-gradient(180deg,#ffd75a,#f5a90c);color:#fff;display:grid;place-items:center;
+  box-shadow:0 5px 0 #c98400, 0 10px 22px rgba(29,79,174,.22);position:relative;-webkit-tap-highlight-color:transparent}
+.music:active{transform:translateY(3px);box-shadow:0 2px 0 #c98400}
+.music .i-play{width:28px;height:28px}
+.music .eq{display:none;gap:3px;align-items:flex-end;height:22px}
+.music .eq i{display:block;width:5px;border-radius:3px;background:#fff;animation:eq .9s ease-in-out infinite}
+.music .eq i:nth-child(2){animation-delay:-.3s}.music .eq i:nth-child(3){animation-delay:-.6s}
+@keyframes eq{0%,100%{height:6px}50%{height:22px}}
+.music.on{background:linear-gradient(180deg,#ff8db2,var(--pink-d));box-shadow:0 5px 0 #c9346a, 0 10px 22px rgba(233,70,127,.3)}
+.music.on .i-play{display:none}.music.on .eq{display:flex}
+.music::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:3px solid #ffc531;opacity:0;animation:ping 2.2s ease-out infinite}
+.music.on::after{border-color:#ff8fb4}
+@keyframes ping{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.55);opacity:0}}
+.music-tip{background:#fff;color:var(--navy);font-family:"Fredoka",sans-serif;font-weight:600;font-size:15px;
+  padding:7px 14px;border-radius:999px;box-shadow:0 6px 16px rgba(29,79,174,.18);white-space:nowrap;
+  transition:opacity .4s, transform .4s}
+.music-tip.hide{opacity:0;transform:translateX(10px);pointer-events:none}
 
 /* ═════════ MODAL DEL JUEGO ═════════ */
 .game{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
@@ -339,23 +388,53 @@ footer svg{width:12px;height:12px;vertical-align:-1px;margin:0 .4em}
   <svg class="daisy-sky" style="left:4%;top:28%;--s:16px;animation-delay:-2.8s" aria-hidden="true"><use href="#daisy"/></svg>
 
   <div class="hero-copy">
-    <p class="kicker disp">Esta aventura se llama…</p>
-    <h1 class="title disp" aria-label="Majo cumple 1">
-      <svg class="heart-top" viewBox="0 0 24 24" fill="#ff4f8b" aria-hidden="true"><use href="#heart"/></svg>
-      <span class="t-majo">Majo</span>
-      <span class="t-cumple">cumple</span>
-      <span class="t-one">1</span>
+    <h1 class="hero-title">
+      <span class="sr">Esta aventura se llama… Majo cumple 1. Ven a celebrar su primer añito.</span>
+      <svg viewBox="0 0 600 450" aria-hidden="true">
+        <defs>
+          <linearGradient id="gPink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffa3c4"/><stop offset=".55" stop-color="#ff6a9c"/><stop offset="1" stop-color="#ef4b85"/></linearGradient>
+          <linearGradient id="gYel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe684"/><stop offset=".6" stop-color="#ffc531"/><stop offset="1" stop-color="#f5a90c"/></linearGradient>
+          <linearGradient id="gRib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9dbe"/><stop offset=".6" stop-color="#f7609a"/><stop offset="1" stop-color="#e94a83"/></linearGradient>
+          <path id="pKick" d="M30 86 Q300 22 570 86"/>
+          <path id="pCumple" d="M118 322 Q262 272 408 302"/>
+          <path id="pRib" d="M64 398 Q300 356 536 392"/>
+        </defs>
+        <g font-family="'Baloo 2','Fredoka',sans-serif" font-weight="800" font-size="42" text-anchor="middle">
+          <text fill="#fff" stroke="#fff" stroke-width="11" stroke-linejoin="round"><textPath href="#pKick" startOffset="50%">Esta aventura se llama…</textPath></text>
+          <text fill="#1d4fae"><textPath href="#pKick" startOffset="50%">Esta aventura se llama…</textPath></text>
+        </g>
+        <g font-family="'Fredoka',sans-serif" font-weight="700" text-anchor="middle" stroke-linejoin="round">
+          <g transform="rotate(-4 250 190)">
+            <text x="250" y="236" font-size="158" fill="#fff" stroke="#fff" stroke-width="26">Majo</text>
+            <text x="250" y="236" font-size="158" fill="url(#gPink)" stroke="#e23f7a" stroke-width="8">Majo</text>
+            <text x="250" y="236" font-size="158" fill="url(#gPink)">Majo</text>
+            <path d="M236 60c-9-10-26-4-24 10 2 11 24 23 24 23s22-12 24-23c2-14-15-20-24-10z" fill="#ff4f8b" stroke="#fff" stroke-width="5" transform="translate(66 40) scale(.8)"/>
+          </g>
+          <text font-size="84" fill="#fff" stroke="#fff" stroke-width="22"><textPath href="#pCumple" startOffset="50%">cumple</textPath></text>
+          <text font-size="84" fill="url(#gPink)" stroke="#e23f7a" stroke-width="8"><textPath href="#pCumple" startOffset="50%">cumple</textPath></text>
+            <text font-size="84" fill="url(#gPink)"><textPath href="#pCumple" startOffset="50%">cumple</textPath></text>
+          <g class="one-hop">
+            <g transform="rotate(7 490 220)">
+              <text x="490" y="334" font-size="290" fill="#fff" stroke="#fff" stroke-width="26">1</text>
+              <text x="490" y="334" font-size="290" fill="url(#gYel)" stroke="#eba000" stroke-width="8">1</text>
+            <text x="490" y="334" font-size="290" fill="url(#gYel)">1</text>
+            </g>
+          </g>
+        </g>
+        <path d="M64 398 Q300 356 536 392" fill="none" stroke="#fff" stroke-width="68" stroke-linecap="round"/>
+        <path d="M64 404 Q300 362 536 398" fill="none" stroke="#d63a72" stroke-width="56" stroke-linecap="round" opacity=".55"/>
+        <path d="M64 398 Q300 356 536 392" fill="none" stroke="url(#gRib)" stroke-width="56" stroke-linecap="round"/>
+        <path d="M120 380 Q300 350 480 376" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".35"/>
+        <text font-family="'Baloo 2','Fredoka',sans-serif" font-weight="700" font-size="30" fill="#fff" text-anchor="middle" dy="10"><textPath href="#pRib" startOffset="50%">Ven a celebrar su primer añito</textPath></text>
+        <path d="M0-6c-4-5-12-2-11 5 1 5 11 11 11 11s10-6 11-11c1-7-7-10-11-5z" fill="#fff1b8" transform="translate(78 393) scale(1.1)"/>
+        <path d="M0-6c-4-5-12-2-11 5 1 5 11 11 11 11s10-6 11-11c1-7-7-10-11-5z" fill="#fff1b8" transform="translate(522 387) scale(1.1)"/>
+      </svg>
     </h1>
-    <div><p class="ribbon disp">
-      <svg viewBox="0 0 24 24" fill="#fff1b8" aria-hidden="true"><use href="#heart"/></svg>
-      Ven a celebrar su primer añito
-      <svg viewBox="0 0 24 24" fill="#fff1b8" aria-hidden="true"><use href="#heart"/></svg>
-    </p></div>
   </div>
 
   <div class="scene">
-    <img class="landscape" src="assets/backgrounds/paisaje-portada.png" alt="" onerror="this.classList.add('slot-missing')">
-    <img class="pair" src="assets/characters/pareja-fiesta.png" alt="Personajes festejando con gorritos de fiesta" onerror="this.classList.add('slot-missing')">
+    <img class="landscape" src="assets/img/paisaje-portada.png" alt="" onerror="this.classList.add('slot-missing')">
+    <img class="pair" src="assets/img/pareja-fiesta.png" alt="Personajes festejando con gorritos de fiesta" onerror="this.classList.add('slot-missing')">
   </div>
   <div class="edge bottom" style="--c:var(--cream)"></div>
 </header>
@@ -365,7 +444,7 @@ footer svg{width:12px;height:12px;vertical-align:-1px;margin:0 .4em}
   <div class="wrap">
     <h2 id="t-cd" class="sec-title disp">
       <svg style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg>
-      Cuenta regresiva
+      <span class="arc" data-bend=".05">Cuenta regresiva</span>
       <svg style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg>
     </h2>
     <div class="cd" id="cd" role="timer" aria-live="off">
@@ -388,7 +467,7 @@ footer svg{width:12px;height:12px;vertical-align:-1px;margin:0 .4em}
   <div class="wrap">
     <h2 id="t-info" class="sec-title disp">
       <svg style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
-      Fecha y lugar
+      <span class="arc" data-bend=".05">Fecha y lugar</span>
       <svg style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
     </h2>
     <div class="info-card">
@@ -424,8 +503,8 @@ footer svg{width:12px;height:12px;vertical-align:-1px;margin:0 .4em}
 <!-- ═════════ JUEGO ═════════ -->
 <section class="play" aria-labelledby="t-play">
   <div class="wrap play-grid">
-    <div>
-      <h2 id="t-play" class="disp">Una pequeña aventura para <em>jugar</em></h2>
+    <h2 id="t-play" class="play-title"><span class="arc" data-bend=".06">Una pequeña aventura</span><span class="arc" data-bend=".05" data-accent="jugar">para jugar</span></h2>
+    <div class="play-copy">
       <p>Salta los regalos y los pastelitos, atrapa globos y ayúdanos a llegar a la fiesta.</p>
       <button class="btn btn-yel" id="btn-play" type="button">
         <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 7h10a5 5 0 0 1 4.8 6.4l-1 3.4a2.6 2.6 0 0 1-4.4 1.1L14.6 16H9.4l-1.8 1.9a2.6 2.6 0 0 1-4.4-1.1l-1-3.4A5 5 0 0 1 7 7zm1 3v1.5H6.5v1.5H8v1.5h1.5V13H11v-1.5H9.5V10zm8.2.3a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
@@ -433,10 +512,10 @@ footer svg{width:12px;height:12px;vertical-align:-1px;margin:0 .4em}
       </button>
     </div>
     <div class="play-art">
-      <img src="assets/characters/pareja-globos.png" alt="Personajes con globos de colores" onerror="this.classList.add('slot-missing')">
+      <img src="assets/img/pareja-globos.png" alt="Personajes con globos de colores" onerror="this.classList.add('slot-missing')">
     </div>
   </div>
-  <div class="meadow-wrap"><img class="meadow" src="assets/backgrounds/pradera-juego.png" alt="" onerror="this.classList.add('slot-missing')"></div>
+  <div class="meadow-wrap"><img class="meadow" src="assets/img/pradera-juego.png" alt="" onerror="this.classList.add('slot-missing')"></div>
   <div class="edge bottom" style="--c:#ffe6ef"></div>
 </section>
 
@@ -445,7 +524,7 @@ footer svg{width:12px;height:12px;vertical-align:-1px;margin:0 .4em}
   <div class="wrap">
     <h2 id="t-rsvp" class="sec-title disp">
       <svg style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
-      Confirma tu asistencia
+      <span class="arc" data-bend=".05">Confirma tu asistencia</span>
       <svg style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
     </h2>
     <p class="lead">Nos encantaría compartir este día tan especial contigo. ¡Te esperamos!</p>
@@ -470,11 +549,27 @@ footer svg{width:12px;height:12px;vertical-align:-1px;margin:0 .4em}
   </div>
 </section>
 
-<footer>
-  <svg viewBox="0 0 24 24" fill="#ff8fb4" aria-hidden="true"><use href="#heart"/></svg>
-  Creado por Celayre · <a href="https://celayre.com" target="_blank" rel="noopener">celayre.com</a>
-  <svg viewBox="0 0 24 24" fill="#ff8fb4" aria-hidden="true"><use href="#heart"/></svg>
+<footer class="brand">
+  <p>Creado por <b>Celayre</b> <span aria-hidden="true">·</span> <a href="https://celayre.com" target="_blank" rel="noopener">celayre.com</a></p>
+  <nav class="social" aria-label="Redes de Celayre">
+    <a href="https://www.facebook.com/celayre/" target="_blank" rel="noopener" aria-label="Celayre en Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.5V21h3z"/></svg></a>
+    <a href="https://www.instagram.com/celayre.mx" target="_blank" rel="noopener" aria-label="Celayre en Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://wa.me/525535932131" target="_blank" rel="noopener" aria-label="Escríbele a Celayre por WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5a9.4 9.4 0 0 0-8.1 14.2L2.6 21.5l4.9-1.3A9.4 9.4 0 1 0 12 2.5zm0 17.1c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A7.7 7.7 0 1 1 12 19.6zm4.2-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.5-.3z"/></svg></a>
+  </nav>
 </footer>
+
+<!-- ═════════ MÚSICA ═════════ -->
+<audio id="song" src="assets/audio/audio.mp3" loop preload="none"></audio>
+<div class="music-wrap">
+  <span class="music-tip" id="music-tip">¡Ponle música!</span>
+  <button class="music" id="music" type="button" aria-pressed="false" aria-label="Reproducir música">
+    <svg class="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.6" fill="currentColor"/><circle cx="16.5" cy="16" r="2.6" fill="currentColor"/></svg>
+    <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+</div>
 
 <!-- ═════════ MODAL DEL JUEGO ═════════ -->
 <div class="game" id="game" role="dialog" aria-modal="true" aria-labelledby="g-title">
@@ -505,6 +600,89 @@ var EVENTO = {
   mapa:   "https://maps.app.goo.gl/FQfujJxBo1FtLBTm9",
   whatsapp: "523331419393"
 };
+
+/* ════════ TÍTULOS CURVOS ════════ */
+(function(){
+  var NS='http://www.w3.org/2000/svg', n=0;
+  function build(el){
+    var text = el.getAttribute('data-text') || el.textContent.trim();
+    el.setAttribute('data-text', text);
+    var accent = el.getAttribute('data-accent');
+    var bend = parseFloat(el.getAttribute('data-bend') || '.05');
+    var cs = getComputedStyle(el), color = cs.color;
+    var fs = 100, sw = fs*.24;
+    var svg = document.createElementNS(NS,'svg'); svg.setAttribute('aria-hidden','true');
+    var probe = document.createElementNS(NS,'text');
+    probe.setAttribute('font-size',fs); probe.setAttribute('font-family',cs.fontFamily); probe.setAttribute('font-weight',cs.fontWeight);
+    probe.textContent = text; svg.appendChild(probe);
+    el.textContent=''; el.appendChild(svg);
+    var L = probe.getComputedTextLength() || text.length*fs*.55;
+    svg.removeChild(probe);
+    var pad = sw, W = L*1.02 + pad*2, rise = bend*L, y0 = rise + fs*.9 + sw*.5, H = y0 + fs*.32 + sw*.5;
+    var id = 'arc'+(++n);
+    svg.setAttribute('viewBox','0 0 '+W.toFixed(1)+' '+H.toFixed(1));
+    svg.style.width = (W/fs*0.95).toFixed(3)+'em';
+    var path = document.createElementNS(NS,'path');
+    path.setAttribute('id',id); path.setAttribute('fill','none');
+    path.setAttribute('d','M'+pad+' '+y0+' Q'+(W/2)+' '+(y0-rise*2)+' '+(W-pad)+' '+y0);
+    svg.appendChild(path);
+    [['#fff',sw],[color,0]].forEach(function(st){
+      var t = document.createElementNS(NS,'text');
+      t.setAttribute('font-size',fs); t.setAttribute('font-family',cs.fontFamily); t.setAttribute('font-weight',cs.fontWeight);
+      t.setAttribute('text-anchor','middle'); t.setAttribute('fill', st[1] ? '#fff' : color);
+      if (st[1]){ t.setAttribute('stroke','#fff'); t.setAttribute('stroke-width',st[1]); t.setAttribute('stroke-linejoin','round'); }
+      var tp = document.createElementNS(NS,'textPath');
+      tp.setAttribute('href','#'+id); tp.setAttribute('startOffset','50%');
+      if (accent && !st[1] && text.indexOf(accent) > -1){
+        var parts = text.split(accent);
+        var a=document.createElementNS(NS,'tspan'); a.textContent=parts[0];
+        var b=document.createElementNS(NS,'tspan'); b.textContent=accent; b.setAttribute('fill','#e9467f');
+        var c=document.createElementNS(NS,'tspan'); c.textContent=parts.slice(1).join(accent);
+        tp.appendChild(a); tp.appendChild(b); tp.appendChild(c);
+      } else tp.textContent = text;
+      t.appendChild(tp); svg.appendChild(t);
+    });
+  }
+  function all(){ document.querySelectorAll('.arc').forEach(build); }
+  all();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
+})();
+
+/* ════════ MÚSICA ════════ */
+(function(){
+  var song = document.getElementById('song');
+  var btn = document.getElementById('music');
+  var tip = document.getElementById('music-tip');
+  var fade;
+  setTimeout(function(){ tip.classList.add('hide'); }, 5000);
+  function setOn(on){
+    btn.classList.toggle('on', on);
+    btn.setAttribute('aria-pressed', on);
+    btn.setAttribute('aria-label', on ? 'Pausar música' : 'Reproducir música');
+  }
+  function fadeTo(v, done){
+    clearInterval(fade);
+    fade = setInterval(function(){
+      var d = v - song.volume;
+      if (Math.abs(d) < .05){ song.volume = v; clearInterval(fade); if (done) done(); return; }
+      song.volume = Math.min(1, Math.max(0, song.volume + (d > 0 ? .05 : -.05)));
+    }, 40);
+  }
+  btn.addEventListener('click', function(){
+    tip.classList.add('hide');
+    if (song.paused){
+      song.volume = 0;
+      var pr = song.play();
+      if (pr && pr.then) pr.then(function(){ setOn(true); fadeTo(.7); })
+                           .catch(function(){ setOn(false); });
+      else { setOn(true); fadeTo(.7); }
+    } else {
+      setOn(false);
+      fadeTo(0, function(){ song.pause(); });
+    }
+  });
+  song.addEventListener('error', function(){ document.querySelector('.music-wrap').style.display='none'; });
+})();
 
 /* ════════ CUENTA REGRESIVA ════════ */
 (function(){
@@ -621,11 +799,11 @@ var EVENTO = {
     img.onload = function(){ SPR[key] = trim(img); if (key==='mareado') veilImg.src = src; };
     img.src = src;
   }
-  load('corre1','assets/game/jugador-corre-1.png');
-  load('corre2','assets/game/jugador-corre-2.png');
-  load('salta','assets/game/jugador-salta.png');
-  load('mareado','assets/game/jugador-mareado.png');
-  var meadow = new Image(); meadow.src = 'assets/backgrounds/pradera-juego.png';
+  load('corre1','assets/img/jugador-corre-1.png');
+  load('corre2','assets/img/jugador-corre-2.png');
+  load('salta','assets/img/jugador-salta.png');
+  load('mareado','assets/img/jugador-mareado.png');
+  var meadow = new Image(); meadow.src = 'assets/img/pradera-juego.png';
 
   /* — Escenario — */
   var W=0, H=0, GROUND=0, PH=80, MH=0, dpr=1;
