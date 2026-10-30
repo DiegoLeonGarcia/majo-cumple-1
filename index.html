@@ -53,6 +53,7 @@ button,input,select{font:inherit;color:inherit}
 .arc svg{display:block;height:auto;max-width:100%;overflow:visible}
 
 /* ── Borde de nube entre secciones ── */
+.cap{position:absolute;left:0;top:-73px;width:100%;height:74px;z-index:5;pointer-events:none;overflow:visible;display:block}
 .edge2{position:absolute;left:0;bottom:-1px;width:100%;height:74px;z-index:3;pointer-events:none;display:block;overflow:visible}
 
 /* ── Decoración de jardín ── */
@@ -67,8 +68,8 @@ button,input,select{font:inherit;color:inherit}
 .side.r{right:-6px;transform:scaleX(-1) rotate(38deg);transform-origin:bottom right}
 .paused .cloud,.paused .sway,.paused .petal,.paused .lf,.paused .esq{animation-play-state:paused}
 .esq{position:absolute;z-index:1;pointer-events:none;height:auto;max-width:none;animation:esqL 7s ease-in-out infinite}
-.esq.tl{top:-26px;left:-2px;width:clamp(140px,38vw,310px);transform-origin:0 0;z-index:4}
-.esq.tr{top:-26px;right:-2px;width:clamp(140px,38vw,310px);transform-origin:100% 0;animation-name:esqR;z-index:4}
+.esq.tl{top:-20px;left:-4%;width:clamp(150px,40vw,320px);transform-origin:0 0;z-index:4}
+.esq.tr{top:-20px;right:-4%;width:clamp(150px,40vw,320px);transform-origin:100% 0;animation-name:esqR;z-index:4}
 /* Las esquinas de arriba nacen detrás de la nube de la sección anterior, igual que las de abajo */
 @supports (overflow:clip){ .countdown,.info,.rsvp{overflow-x:clip!important;overflow-y:visible!important} }
 .esq.bl{bottom:26px;left:-2px;width:clamp(120px,33vw,270px);transform-origin:0 100%;animation-name:esqR}
@@ -251,11 +252,11 @@ button,input,select{font:inherit;color:inherit}
 .brand p{display:flex;align-items:center;justify-content:center;gap:.45em;flex-wrap:wrap}
 .brand p svg{width:13px;height:13px}
 .brand a{color:var(--navy);text-decoration:none;font-weight:800}
-.social{display:flex;justify-content:center;gap:10px;margin-top:10px}
-.social a{width:38px;height:38px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;
+.social{display:flex;justify-content:center;gap:14px;margin-top:12px}
+.social a{width:50px;height:50px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;
   box-shadow:0 2px 8px rgba(42,90,168,.1);transition:transform .15s}
 .social a:hover,.social a:focus-visible{transform:translateY(-2px)}
-.social svg{width:18px;height:18px}
+.social svg{width:26px;height:26px}
 
 /* ═════════ MODAL DEL JUEGO ═════════ */
 .game{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
@@ -627,22 +628,44 @@ var EVENTO = {
     var curve = Math.min(24, w*.03);                 /* las orillas suben hacia los lados */
     var R = rnd(17 + k*31);
     function base(x){ var u = (2*x/w - 1); return h - 14 - curve*(u*u); }
-    var x = -r0*.6, y = base(x) + (R()-.5)*3, d = 'M-2 '+(h+2)+' L-2 '+y.toFixed(1)+' L'+x.toFixed(1)+' '+y.toFixed(1);
+    var x = -r0*.6, y = base(x) + (R()-.5)*3;
+    var c = 'M-6 '+y.toFixed(1)+' L'+x.toFixed(1)+' '+y.toFixed(1);   /* contorno de nubes */
     while (x < w + r0){
-      var r = r0*(.75 + R()*.5), c = r*(1.25 + R()*.35);
-      var x2 = x + c, y2 = base(x2) + (R()-.5)*3;
-      d += ' A'+r.toFixed(1)+' '+r.toFixed(1)+' 0 0 1 '+x2.toFixed(1)+' '+y2.toFixed(1);
+      var r = r0*(.75 + R()*.5), ch = r*(1.25 + R()*.35);
+      var x2 = x + ch, y2 = base(x2) + (R()-.5)*3;
+      c += ' A'+r.toFixed(1)+' '+r.toFixed(1)+' 0 0 1 '+x2.toFixed(1)+' '+y2.toFixed(1);
       x = x2; y = y2;
     }
-    d += ' L'+(w+2)+' '+(h+2)+' Z';
+    var color = svg.getAttribute('data-c');
     svg.setAttribute('viewBox','0 0 '+w+' '+h);
     svg.innerHTML = '';
-    var p = document.createElementNS(NS,'path');
-    p.setAttribute('d', d);
-    p.style.fill = svg.getAttribute('data-c');
-    p.setAttribute('stroke','#eef6fc'); p.setAttribute('stroke-width','8');
-    p.setAttribute('stroke-linejoin','round'); p.setAttribute('paint-order','stroke');
-    svg.appendChild(p);
+    /* 1) orilla clarita (solo el contorno, nunca abajo ni a los lados) */
+    var rim = document.createElementNS(NS,'path');
+    rim.setAttribute('d', c); rim.setAttribute('fill','none'); rim.setAttribute('stroke','#eef6fc');
+    rim.setAttribute('stroke-width','8'); rim.setAttribute('stroke-linejoin','round');
+    svg.appendChild(rim);
+    /* 2) relleno de la nube */
+    var fill = document.createElementNS(NS,'path');
+    fill.setAttribute('d', c + ' L'+(w+6)+' '+(h+2)+' L-6 '+(h+2)+' Z');
+    fill.style.fill = color;
+    svg.appendChild(fill);
+    /* 3) si la sección siguiente tiene esquinas arriba, una "tapa" de nube
+          para que la planta quede metida debajo de las nubes, como abajo */
+    var sec = svg.parentNode, next = sec && sec.nextElementSibling;
+    if (next && next.querySelector('.esq.tl, .esq.tr')){
+      var len = rim.getTotalLength(), pts = [];
+      for (var d = 0; d <= len; d += 5){ var q = rim.getPointAtLength(d); pts.push(q); }
+      var D = 26, cd = 'M'+pts[0].x.toFixed(1)+' '+pts[0].y.toFixed(1);
+      for (var i = 1; i < pts.length; i++) cd += ' L'+pts[i].x.toFixed(1)+' '+pts[i].y.toFixed(1);
+      for (i = pts.length - 1; i >= 0; i--) cd += ' L'+pts[i].x.toFixed(1)+' '+(pts[i].y + D).toFixed(1);
+      cd += ' Z';
+      var cap = next.querySelector(':scope > svg.cap');
+      if (!cap){ cap = document.createElementNS(NS,'svg'); cap.setAttribute('class','cap'); cap.setAttribute('aria-hidden','true'); next.insertBefore(cap, next.firstChild); }
+      cap.setAttribute('viewBox','0 0 '+w+' '+h);
+      cap.innerHTML = '';
+      var cp = document.createElementNS(NS,'path'); cp.setAttribute('d', cd); cp.style.fill = color;
+      cap.appendChild(cp);
+    }
   }
   var edges = [].slice.call(document.querySelectorAll('.edge2'));
   function all(){ edges.forEach(draw); }
