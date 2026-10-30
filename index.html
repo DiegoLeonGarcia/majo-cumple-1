@@ -67,8 +67,10 @@ button,input,select{font:inherit;color:inherit}
 .side.r{right:-6px;transform:scaleX(-1) rotate(38deg);transform-origin:bottom right}
 .paused .cloud,.paused .sway,.paused .petal,.paused .lf,.paused .esq{animation-play-state:paused}
 .esq{position:absolute;z-index:1;pointer-events:none;height:auto;max-width:none;animation:esqL 7s ease-in-out infinite}
-.esq.tl{top:-2px;left:-2px;width:clamp(96px,26vw,230px);transform-origin:0 0}
-.esq.tr{top:-2px;right:-2px;width:clamp(96px,26vw,230px);transform-origin:100% 0;animation-name:esqR}
+.esq.tl{top:-26px;left:-2px;width:clamp(140px,38vw,310px);transform-origin:0 0;z-index:4}
+.esq.tr{top:-26px;right:-2px;width:clamp(140px,38vw,310px);transform-origin:100% 0;animation-name:esqR;z-index:4}
+/* Las esquinas de arriba nacen detrás de la nube de la sección anterior, igual que las de abajo */
+@supports (overflow:clip){ .countdown,.info,.rsvp{overflow-x:clip!important;overflow-y:visible!important} }
 .esq.bl{bottom:26px;left:-2px;width:clamp(120px,33vw,270px);transform-origin:0 100%;animation-name:esqR}
 .esq.br{bottom:26px;right:-2px;width:clamp(120px,33vw,270px);transform-origin:100% 100%}
 @keyframes esqL{0%,100%{transform:rotate(0)}50%{transform:rotate(1.4deg)}}
