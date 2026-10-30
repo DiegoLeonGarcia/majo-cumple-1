@@ -252,11 +252,11 @@ button,input,select{font:inherit;color:inherit}
 .brand p{display:flex;align-items:center;justify-content:center;gap:.45em;flex-wrap:wrap}
 .brand p svg{width:13px;height:13px}
 .brand a{color:var(--navy);text-decoration:none;font-weight:800}
-.social{display:flex;justify-content:center;gap:14px;margin-top:12px}
-.social a{width:50px;height:50px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;
+.social{display:flex;justify-content:center;gap:12px;margin-top:10px}
+.social a{width:42px;height:42px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;
   box-shadow:0 2px 8px rgba(42,90,168,.1);transition:transform .15s}
 .social a:hover,.social a:focus-visible{transform:translateY(-2px)}
-.social svg{width:26px;height:26px}
+.social svg{width:20px;height:20px}
 
 /* ═════════ MODAL DEL JUEGO ═════════ */
 .game{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
@@ -427,7 +427,7 @@ button,input,select{font:inherit;color:inherit}
 
 <!-- ═════════ CUENTA REGRESIVA ═════════ -->
 <section class="countdown" id="cuenta" aria-labelledby="t-cd">
-  <img class="esq tl" src="assets/img/esquina-superior-izquierda.png" alt="" aria-hidden="true">
+  <img class="esq bl" src="assets/img/esquina-inferior-izquierda.png" alt="" aria-hidden="true">
   <img class="esq br" src="assets/img/esquina-inferior-derecha.png" alt="" aria-hidden="true">
   <div class="wrap">
     <h2 id="t-cd" class="sec-title" aria-label="Cuenta regresiva">
@@ -448,13 +448,16 @@ button,input,select{font:inherit;color:inherit}
 
 <!-- ═════════ FECHA Y LUGAR ═════════ -->
 <section class="info" aria-labelledby="t-info">
+  <img class="esq bl" src="assets/img/esquina-inferior-izquierda.png" alt="" aria-hidden="true">
+  <img class="esq br" src="assets/img/esquina-inferior-derecha.png" alt="" aria-hidden="true">
   <svg class="cloud soft" style="top:5%;width:120px;animation-duration:95s;animation-delay:-20s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
   <svg class="cloud soft" style="top:20%;width:190px;animation-duration:130s;animation-delay:-80s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
   <svg class="cloud soft" style="top:38%;width:100px;animation-duration:85s;animation-delay:-50s" viewBox="0 0 160 100" aria-hidden="true"><use href="#cloud3"/></svg>
   <svg class="cloud soft" style="top:55%;width:150px;animation-duration:115s;animation-delay:-10s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
   <svg class="cloud soft" style="top:70%;width:90px;animation-duration:100s;animation-delay:-65s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
-  <img class="esq tr" src="assets/img/esquina-superior-derecha.png" alt="" aria-hidden="true">
-  <img class="esq bl" src="assets/img/esquina-inferior-izquierda.png" alt="" aria-hidden="true">
+  <svg class="cloud soft" style="top:13%;width:80px;animation-duration:140s;animation-delay:-110s" viewBox="0 0 160 100" aria-hidden="true"><use href="#cloud3"/></svg>
+  <svg class="cloud soft" style="top:46%;width:170px;animation-duration:150s;animation-delay:-30s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="cloud soft" style="top:82%;width:130px;animation-duration:125s;animation-delay:-95s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
   <div class="wrap">
     <h2 id="t-info" class="sec-title" aria-label="Fecha y lugar">
       <svg class="spark" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
@@ -521,9 +524,12 @@ button,input,select{font:inherit;color:inherit}
 
 <!-- ═════════ CONFIRMACIÓN ═════════ -->
 <section class="rsvp" aria-labelledby="t-rsvp">
-  <svg class="cloud" style="top:8%;width:120px;fill:#fff;opacity:.55;animation-duration:120s;animation-delay:-40s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
-  <img class="esq tl" src="assets/img/esquina-superior-izquierda.png" alt="" aria-hidden="true">
+  <img class="esq bl" src="assets/img/esquina-inferior-izquierda.png" alt="" aria-hidden="true">
   <img class="esq br" src="assets/img/esquina-inferior-derecha.png" alt="" aria-hidden="true">
+  <svg class="cloud" style="top:8%;width:120px;fill:#fff;opacity:.55;animation-duration:120s;animation-delay:-40s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
+  <svg class="cloud" style="top:30%;width:90px;fill:#fff;opacity:.5;animation-duration:105s;animation-delay:-75s" viewBox="0 0 160 100" aria-hidden="true"><use href="#cloud3"/></svg>
+  <svg class="cloud" style="top:52%;width:150px;fill:#fff;opacity:.5;animation-duration:135s;animation-delay:-15s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="cloud" style="top:72%;width:100px;fill:#fff;opacity:.45;animation-duration:115s;animation-delay:-100s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
   <div class="wrap">
     <h2 id="t-rsvp" class="sec-title" aria-label="Confirma tu asistencia">
       <svg class="spark" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
@@ -732,11 +738,11 @@ var EVENTO = {
   document.getElementById('down').addEventListener('click', function(){
     var target = document.getElementById('cuenta').getBoundingClientRect().top + window.pageYOffset - 6;
     var start = window.pageYOffset, dist = target - start, t0 = null, stop = false;
-    var dur = Math.max(900, Math.min(1500, Math.abs(dist) * 1.3));
+    var dur = Math.max(1200, Math.min(1800, Math.abs(dist) * 1.6));
     if (matchMedia('(prefers-reduced-motion: reduce)').matches){ window.scrollTo(0,target); return; }
     function cancel(){ stop = true; }
     ['wheel','touchstart','keydown'].forEach(function(ev){ window.addEventListener(ev, cancel, {once:true, passive:true}); });
-    function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; }   /* arranca suave, frena suave */
+    function ease(t){ return -(Math.cos(Math.PI * t) - 1) / 2; }   /* seno: el arranque y el frenado más suaves */
     function step(ts){
       if (stop) return;
       if (!t0) t0 = ts;
