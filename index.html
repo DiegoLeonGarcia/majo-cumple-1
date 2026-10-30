@@ -52,10 +52,7 @@ button,input,select{font:inherit;color:inherit}
 .arc svg{display:block;height:auto;max-width:100%;overflow:visible}
 
 /* ── Borde de nube entre secciones ── */
-.edge{position:absolute;left:0;right:0;height:30px;z-index:3;pointer-events:none;
-  background:radial-gradient(circle at 50% 100%, var(--c) 27px, transparent 28px) 0 0/56px 30px repeat-x,
-             radial-gradient(circle at 50% 100%, var(--c) 19px, transparent 20px) 28px 9px/56px 21px repeat-x}
-.edge.bottom{bottom:-1px}
+.edge2{position:absolute;left:0;bottom:-1px;width:100%;height:58px;z-index:3;pointer-events:none;display:block;overflow:visible}
 
 /* ── Decoración de jardín ── */
 .deco{position:absolute;pointer-events:none;z-index:2}
@@ -85,11 +82,11 @@ button,input,select{font:inherit;color:inherit}
 .garland.right .flags{animation-delay:-2s}
 @keyframes flutter{0%,100%{transform:rotate(0)}50%{transform:rotate(1.5deg)}}
 
-.daisy-sky{position:absolute;z-index:1;width:var(--s,24px);height:var(--s,24px);animation:twinkle 3.6s ease-in-out infinite}
+.daisy-sky{position:absolute;z-index:1;width:var(--s);height:var(--s);animation:twinkle 3.6s ease-in-out infinite}
 @keyframes twinkle{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(18deg) scale(1.1)}}
 
 .hero-copy{position:relative;z-index:5;padding:0 var(--pad)}
-.hero-title svg{display:block;width:min(100%,600px);height:auto;margin:0 auto;overflow:visible;
+.hero-title svg{display:block;width:min(100%,600px,62vh);height:auto;margin:0 auto;overflow:visible;
   filter:drop-shadow(0 6px 10px rgba(42,90,168,.12));
   animation:pop .9s cubic-bezier(.2,1.5,.4,1) both, floaty 5s ease-in-out .9s infinite}
 @keyframes pop{0%{transform:scale(.6) translateY(20px);opacity:0}100%{transform:scale(1);opacity:1}}
@@ -98,19 +95,19 @@ button,input,select{font:inherit;color:inherit}
 @keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
 .scene{position:relative;z-index:2;
-  --pw: clamp(190px, 50vw, 380px);
-  height:calc(max(var(--lh), var(--pw) * .95 + var(--lh) * .14));
-  margin-top:clamp(-6px,-1vw,0px)}
+  --pw: min(clamp(190px, 50vw, 380px), 36vh);
+  --ground: calc(var(--lh) * .04 + 24px);
+  height:max(min(var(--lh), 44vh), calc(var(--pw) * .95 + var(--ground)))}
 .landscape{position:absolute;bottom:0;left:50%;transform:translateX(-50%);
   width:clamp(600px,100vw,1800px);max-width:none;z-index:0;pointer-events:none}
 .stand{position:absolute;z-index:1;width:var(--pw)}
 .stand::after{content:"";position:absolute;left:18%;right:18%;bottom:-6px;height:16px;border-radius:50%;
   background:radial-gradient(ellipse at center, rgba(56,98,52,.32), rgba(56,98,52,0) 70%);z-index:-1}
 .stand img{width:100%;transform:translateY(calc(var(--foot,.08) * 100%))}
-.scene .stand{left:50%;bottom:calc(var(--lh) * .14);transform:translateX(-50%)}
+.scene .stand{left:50%;bottom:var(--ground);transform:translateX(-50%)}
 .slot-missing{display:none!important}
 
-.down{position:absolute;left:50%;bottom:-4px;z-index:6;transform:translateX(-50%);
+.down{position:absolute;left:50%;bottom:4px;z-index:6;transform:translateX(-50%);
   width:38px;height:38px;border-radius:50%;border:0;cursor:pointer;
   background:rgba(255,255,255,.85);color:var(--navy);display:grid;place-items:center;
   box-shadow:0 4px 12px rgba(42,90,168,.15);animation:nudge 2.2s ease-in-out infinite}
@@ -153,8 +150,12 @@ button,input,select{font:inherit;color:inherit}
 .cd-done{display:none;text-align:center;margin-top:18px;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(24px,6vw,36px);color:var(--pink-d)}
 
 /* ═════════ FECHA Y LUGAR ═════════ */
-.info{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--blue-bg),#eef8ff);padding:clamp(34px,7vw,52px) 0 clamp(70px,13vw,100px)}
-.info-card{position:relative;z-index:3;max-width:620px;margin:clamp(14px,3.5vw,22px) auto 0;background:#fff;
+.info{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--blue-bg),#eef8ff);padding:clamp(34px,7vw,52px) 0 clamp(100px,22vw,140px)}
+.cloud.soft{opacity:.75}
+.bush-l,.bush-r{bottom:8px;width:clamp(110px,28vw,230px);height:clamp(66px,16.8vw,138px);z-index:2}
+.bush-l{left:0}.bush-r{right:0;transform:scaleX(-1)}
+.stem-b{bottom:22px;z-index:2}
+.info-card{position:relative;z-index:4;max-width:620px;margin:clamp(14px,3.5vw,22px) auto 0;background:#fff;
   border-radius:24px;padding:clamp(14px,3.6vw,24px);box-shadow:0 6px 20px rgba(74,90,124,.08)}
 .info .wrap{padding:0 clamp(26px,8vw,48px)}
 .facts{display:grid;grid-template-columns:1.1fr .9fr 1.3fr}
@@ -166,7 +167,7 @@ button,input,select{font:inherit;color:inherit}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,2.4vw,14px);margin-top:clamp(14px,3.6vw,20px)}
 
 /* Botones planos, pastel */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;border:0;cursor:pointer;text-decoration:none;
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;white-space:nowrap;border:0;cursor:pointer;text-decoration:none;
   color:#fff;font-family:"Baloo 2","Fredoka",sans-serif;font-weight:700;font-size:clamp(15px,4vw,19px);line-height:1.15;
   padding:.7em 1.1em;border-radius:999px;min-height:50px;transition:filter .15s, transform .15s;-webkit-tap-highlight-color:transparent;
   box-shadow:0 3px 10px rgba(74,90,124,.12)}
@@ -176,33 +177,33 @@ button,input,select{font:inherit;color:inherit}
 .btn .chev{width:.8em;height:.8em;margin-left:.1em;opacity:.9}
 .btn-pink{background:var(--pink)}
 .btn-blue{background:var(--blue)}
-.btn-yel{background:var(--yellow);font-size:clamp(20px,5.4vw,28px);padding:.5em 1.3em}
+.btn-yel{background:var(--yellow);font-size:clamp(19px,5vw,28px);padding:.45em 1.3em}
 .btn-wa{background:var(--green-wa);width:100%}
 .btn-wa[disabled]{opacity:.5;cursor:default}
 
 /* ═════════ JUEGO ═════════ */
 .play{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--play-bg) 0%,#fff9f6 55%,#eef8ff 100%);
-  padding-top:clamp(30px,6vw,50px);padding-bottom:max(calc(var(--mh) * .135), 46px)}
-.meadow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:clamp(700px,100vw,1800px);max-width:none;z-index:0;pointer-events:none}
-.play-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;align-items:end;column-gap:clamp(4px,2vw,24px)}
-.play-copy{padding-bottom:max(calc(var(--mh) * .2), 54px);text-align:left;padding-top:4px}
-.play-title{color:var(--navy);font-family:"Baloo 2","Fredoka",sans-serif;font-weight:800;line-height:1;
-  font-size:clamp(24px,6.8vw,42px);position:relative;display:block;grid-column:1/-1;grid-row:1;justify-self:start}
-.play-title .line{display:flex;align-items:center;gap:.1em}
-.play-title .line + .line{margin-top:-.28em}
-.play-title .spark{width:.8em;height:.8em}
-.play-copy p{margin:.5em 0 .9em;font-size:clamp(13px,3.4vw,17px);max-width:26em}
+  --mh: calc(clamp(980px, 100vw, 1800px) / 3);
+  --grass: max(calc(var(--mh) * .13), 40px);
+  padding-top:clamp(30px,6vw,50px);padding-bottom:var(--grass);min-height:calc(var(--mh) * 1.15)}
+.meadow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:clamp(980px,100vw,1800px);max-width:none;z-index:0;pointer-events:none}
+.play-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;align-items:end;column-gap:clamp(0px,2vw,24px);min-height:calc(var(--mh) * 1.15 - var(--grass) - clamp(30px,6vw,50px))}
+.play-copy{grid-column:1/-1;grid-row:1;align-self:start;text-align:left;padding-top:clamp(0px,2vw,20px);position:relative;z-index:2}
+.play-title{color:var(--navy);font-family:"Baloo 2","Fredoka",sans-serif;font-weight:800;line-height:1;font-size:clamp(24px,6.6vw,44px);display:block}
+.play-title .line{display:flex;align-items:center;gap:.08em}
+.play-title .line + .line{margin-top:-.2em;padding-left:.2em}
+.play-title .spark{width:.75em;height:.75em}
+.play-copy p{margin:.45em 0 .9em;font-size:clamp(13px,3.6vw,18px);max-width:min(20em,58%)}
+.play-art{grid-column:2;grid-row:1;justify-self:end;align-self:end;width:min(108%,460px);margin-right:calc(var(--pad) * -.4)}
 .play-art .stand{position:relative;width:100%}
-.play-art{grid-column:2;grid-row:2;justify-self:end;width:min(104%,440px);margin-right:calc(var(--pad) * -.4)}
-.play-copy{grid-column:1;grid-row:2}
 .petal{position:absolute;z-index:1;width:var(--s,18px);height:var(--s,18px);opacity:.9;animation:float var(--d,7s) ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(40deg)}}
 
 /* ═════════ CONFIRMACIÓN ═════════ */
-.rsvp{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--pink-bg),#fff3f7);padding:clamp(38px,8vw,60px) 0 clamp(70px,12vw,96px);text-align:center}
-.rsvp .wrap{padding:0 clamp(40px,11vw,60px)}
+.rsvp{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--pink-bg),#fff3f7);padding:clamp(38px,8vw,60px) 0 clamp(110px,24vw,150px);text-align:center}
+.rsvp .wrap{padding:0 clamp(24px,7vw,60px)}
 .rsvp .lead{margin:.3em auto 0;max-width:30em;font-size:clamp(14px,3.7vw,18px)}
-.rsvp-box{max-width:440px;margin:clamp(16px,4vw,24px) auto 0;display:grid;gap:12px;position:relative;z-index:3}
+.rsvp-box{max-width:420px;margin:clamp(16px,4vw,24px) auto 0;display:grid;gap:12px;position:relative;z-index:3}
 .choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .opt{border:2px solid transparent;background:#fff;border-radius:18px;padding:.75em .6em;cursor:pointer;
   font-family:"Baloo 2","Fredoka",sans-serif;font-weight:700;font-size:clamp(15px,4vw,18px);color:var(--navy);
@@ -217,9 +218,8 @@ button,input,select{font:inherit;color:inherit}
 .form-msg{min-height:1.3em;font-weight:700;color:var(--pink-d);font-size:14px}
 
 /* ═════════ PIE ═════════ */
-.brand{position:relative;background:linear-gradient(180deg,var(--foot-bg),#eaf6ff);text-align:center;
+.brand{position:relative;background:linear-gradient(180deg,var(--foot-bg),#eaf6ff);margin-top:-1px;text-align:center;
   padding:22px var(--pad) calc(24px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:14px}
-.brand .edge{top:-29px;--c:var(--foot-bg)}
 .brand p{display:flex;align-items:center;justify-content:center;gap:.45em;flex-wrap:wrap}
 .brand p svg{width:13px;height:13px}
 .brand a{color:var(--navy);text-decoration:none;font-weight:800}
@@ -259,9 +259,8 @@ button,input,select{font:inherit;color:inherit}
   .facts{grid-template-columns:1fr 1fr}
   .fact.place{grid-column:1/-1;border-left:0;border-top:2px solid #edf2f9;margin-top:10px;padding-top:12px}
 }
-@media (max-width:360px){ .actions{grid-template-columns:1fr} }
+@media (max-width:620px){ .actions{grid-template-columns:1fr} }
 @media (min-width:900px){ .hero{padding-top:64px} }
-@media (min-width:700px){ .scene{margin-top:calc(var(--lh) * -.2)} }
 @media (orientation:landscape) and (max-height:520px){
   .stage{height:calc(100vh - 100px)} .panel{padding:8px} .hud{padding-bottom:6px}
 }
@@ -358,10 +357,10 @@ button,input,select{font:inherit;color:inherit}
     </svg>
   </div>
 
-  <svg class="daisy-sky" style="left:6%;top:20%;--s:26px" aria-hidden="true"><use href="#daisy"/></svg>
-  <svg class="daisy-sky" style="right:7%;top:18%;--s:28px;animation-delay:-1.2s" aria-hidden="true"><use href="#daisy"/></svg>
-  <svg class="daisy-sky" style="left:11%;top:40%;--s:18px;animation-delay:-2s" aria-hidden="true"><use href="#daisy"/></svg>
-  <svg class="daisy-sky" style="right:12%;top:36%;--s:20px;animation-delay:-.6s" aria-hidden="true"><use href="#daisy"/></svg>
+  <svg class="daisy-sky" style="left:6%;top:20%;--s:clamp(24px,7vw,42px)" aria-hidden="true"><use href="#daisy"/></svg>
+  <svg class="daisy-sky" style="right:7%;top:18%;--s:clamp(24px,7vw,42px);animation-delay:-1.2s" aria-hidden="true"><use href="#daisy"/></svg>
+  <svg class="daisy-sky" style="left:11%;top:40%;--s:clamp(24px,7vw,42px);animation-delay:-2s" aria-hidden="true"><use href="#daisy"/></svg>
+  <svg class="daisy-sky" style="right:12%;top:36%;--s:clamp(24px,7vw,42px);animation-delay:-.6s" aria-hidden="true"><use href="#daisy"/></svg>
 
   <div class="hero-copy">
     <h1 class="hero-title">
@@ -415,15 +414,15 @@ button,input,select{font:inherit;color:inherit}
   <button class="down" id="down" type="button" aria-label="Bajar a la cuenta regresiva">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
   </button>
-  <div class="edge bottom" style="--c:var(--cream)"></div>
+  <svg class="edge2" data-c="var(--cream)" aria-hidden="true"></svg>
 </header>
 
 <!-- ═════════ CUENTA REGRESIVA ═════════ -->
 <section class="countdown" id="cuenta" aria-labelledby="t-cd">
-  <svg class="deco sway" style="left:2px;bottom:34px;width:clamp(30px,8vw,52px);height:clamp(66px,17vw,114px)" aria-hidden="true"><use href="#stem-y"/></svg>
-  <svg class="deco sway" style="left:clamp(18px,5vw,40px);bottom:28px;width:clamp(22px,6vw,38px);height:clamp(48px,13vw,84px);animation-delay:-2s" aria-hidden="true"><use href="#stem"/></svg>
-  <svg class="deco sway" style="right:2px;bottom:34px;width:clamp(30px,8vw,52px);height:clamp(66px,17vw,114px);animation-delay:-1s" aria-hidden="true"><use href="#stem"/></svg>
-  <svg class="deco sway" style="right:clamp(18px,5vw,40px);bottom:28px;width:clamp(22px,6vw,38px);height:clamp(48px,13vw,84px);animation-delay:-3s" aria-hidden="true"><use href="#stem-y"/></svg>
+  <svg class="deco sway" style="left:2px;bottom:16px;width:clamp(30px,8vw,52px);height:clamp(66px,17vw,114px)" aria-hidden="true"><use href="#stem-y"/></svg>
+  <svg class="deco sway" style="left:clamp(18px,5vw,40px);bottom:14px;width:clamp(22px,6vw,38px);height:clamp(48px,13vw,84px);animation-delay:-2s" aria-hidden="true"><use href="#stem"/></svg>
+  <svg class="deco sway" style="right:2px;bottom:16px;width:clamp(30px,8vw,52px);height:clamp(66px,17vw,114px);animation-delay:-1s" aria-hidden="true"><use href="#stem"/></svg>
+  <svg class="deco sway" style="right:clamp(18px,5vw,40px);bottom:14px;width:clamp(22px,6vw,38px);height:clamp(48px,13vw,84px);animation-delay:-3s" aria-hidden="true"><use href="#stem-y"/></svg>
   <div class="wrap">
     <h2 id="t-cd" class="sec-title" aria-label="Cuenta regresiva">
       <svg class="spark" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg>
@@ -438,15 +437,16 @@ button,input,select{font:inherit;color:inherit}
     <div class="cd-card c-lil"><div class="n" id="cd-s">--</div><div class="l">Seg</div><svg fill="#b9a2f0" aria-hidden="true"><use href="#star"/></svg></div>
   </div>
   <p class="cd-done" id="cd-done">¡Hoy es el gran día!</p>
-  <div class="edge bottom" style="--c:var(--blue-bg)"></div>
+  <svg class="edge2" data-c="var(--blue-bg)" aria-hidden="true"></svg>
 </section>
 
 <!-- ═════════ FECHA Y LUGAR ═════════ -->
 <section class="info" aria-labelledby="t-info">
-  <svg class="deco" style="left:-20px;bottom:18px;width:clamp(120px,30vw,230px);height:clamp(72px,18vw,138px)" aria-hidden="true"><use href="#bush"/></svg>
-  <svg class="deco" style="right:-20px;bottom:18px;width:clamp(120px,30vw,230px);height:clamp(72px,18vw,138px);transform:scaleX(-1)" aria-hidden="true"><use href="#bush"/></svg>
-  <svg class="deco sway" style="left:4px;top:42%;width:clamp(24px,6vw,40px);height:clamp(52px,13vw,88px)" aria-hidden="true"><use href="#stem"/></svg>
-  <svg class="deco sway" style="right:4px;top:38%;width:clamp(24px,6vw,40px);height:clamp(52px,13vw,88px);animation-delay:-2s" aria-hidden="true"><use href="#stem-y"/></svg>
+  <svg class="cloud soft" style="top:8%;width:130px;animation-duration:90s;animation-delay:-20s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="cloud soft" style="top:30%;width:180px;animation-duration:120s;animation-delay:-70s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="cloud soft" style="top:58%;width:110px;animation-duration:100s;animation-delay:-45s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="deco bush-l" aria-hidden="true"><use href="#bush"/></svg>
+  <svg class="deco bush-r" aria-hidden="true"><use href="#bush"/></svg>
   <div class="wrap">
     <h2 id="t-info" class="sec-title" aria-label="Fecha y lugar">
       <svg class="spark" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
@@ -480,7 +480,7 @@ button,input,select{font:inherit;color:inherit}
       </div>
     </div>
   </div>
-  <div class="edge bottom" style="--c:var(--play-bg)"></div>
+  <svg class="edge2" data-c="var(--play-bg)" aria-hidden="true"></svg>
 </section>
 
 <!-- ═════════ JUEGO ═════════ -->
@@ -492,13 +492,12 @@ button,input,select{font:inherit;color:inherit}
   <svg class="petal" style="right:30%;top:34%;--s:14px;--d:9s;animation-delay:-1s" aria-hidden="true"><use href="#daisy"/></svg>
   <svg class="petal" style="left:3%;top:52%;--s:14px;--d:7.5s;animation-delay:-3s" aria-hidden="true"><use href="#daisy"/></svg>
   <div class="wrap play-grid">
-      <h2 id="t-play" class="play-title" aria-label="Una pequeña aventura para jugar">
-        <span class="line"><svg class="spark" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg><span class="arc" data-bend=".045" data-align="left">Una pequeña aventura</span></span>
-        <span class="line"><span class="arc" data-bend=".04" data-accent="jugar" data-align="left" style="margin-left:.9em">para jugar</span><svg class="spark r" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg></span>
-      </h2>
     <div class="play-copy">
-
-      <p>Salta los regalos y los pastelitos, atrapa globos y ayúdanos a llegar a la fiesta.</p>
+      <h2 id="t-play" class="play-title" aria-label="Una pequeña aventura para jugar">
+        <span class="line"><span class="arc" data-bend=".035">Una pequeña aventura</span><svg class="spark r" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg></span>
+        <span class="line"><svg class="spark" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg><span class="arc" data-bend=".03" data-accent="jugar">para jugar</span></span>
+      </h2>
+      <p>Salta los regalos, atrapa globos y llega a la fiesta.</p>
       <button class="btn btn-yel" id="btn-play" type="button">
         <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 7h10a5 5 0 0 1 4.8 6.4l-1 3.4a2.6 2.6 0 0 1-4.4 1.1L14.6 16H9.4l-1.8 1.9a2.6 2.6 0 0 1-4.4-1.1l-1-3.4A5 5 0 0 1 7 7zm1 3v1.5H6.5v1.5H8v1.5h1.5V13H11v-1.5H9.5V10zm8.2.3a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
         Jugar<svg class="chev" aria-hidden="true"><use href="#chev"/></svg>
@@ -508,15 +507,15 @@ button,input,select{font:inherit;color:inherit}
       <div class="stand"><img class="feet" src="assets/img/pareja-globos.png" alt="Personajes con globos de colores" onerror="this.parentNode.classList.add('slot-missing')"></div>
     </div>
   </div>
-  <div class="edge bottom" style="--c:var(--pink-bg)"></div>
+  <svg class="edge2" data-c="var(--pink-bg)" aria-hidden="true"></svg>
 </section>
 
 <!-- ═════════ CONFIRMACIÓN ═════════ -->
 <section class="rsvp" aria-labelledby="t-rsvp">
-  <svg class="deco sway" style="left:2px;top:30%;width:clamp(30px,8vw,50px);height:clamp(66px,17vw,110px)" aria-hidden="true"><use href="#stem"/></svg>
-  <svg class="deco sway" style="left:clamp(14px,4vw,34px);bottom:30px;width:clamp(26px,7vw,44px);height:clamp(58px,15vw,96px);animation-delay:-2s" aria-hidden="true"><use href="#stem-y"/></svg>
-  <svg class="deco sway" style="right:2px;top:34%;width:clamp(30px,8vw,50px);height:clamp(66px,17vw,110px);animation-delay:-1s" aria-hidden="true"><use href="#stem-y"/></svg>
-  <svg class="deco sway" style="right:clamp(14px,4vw,34px);bottom:30px;width:clamp(26px,7vw,44px);height:clamp(58px,15vw,96px);animation-delay:-3s" aria-hidden="true"><use href="#stem"/></svg>
+  <svg class="deco bush-l" aria-hidden="true"><use href="#bush"/></svg>
+  <svg class="deco bush-r" aria-hidden="true"><use href="#bush"/></svg>
+  <svg class="deco sway stem-b" style="left:clamp(70px,20vw,170px);width:clamp(24px,6vw,40px);height:clamp(54px,13vw,88px)" aria-hidden="true"><use href="#stem-y"/></svg>
+  <svg class="deco sway stem-b" style="right:clamp(70px,20vw,170px);width:clamp(24px,6vw,40px);height:clamp(54px,13vw,88px);animation-delay:-2s" aria-hidden="true"><use href="#stem"/></svg>
   <div class="wrap">
     <h2 id="t-rsvp" class="sec-title" aria-label="Confirma tu asistencia">
       <svg class="spark" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
@@ -545,15 +544,11 @@ button,input,select{font:inherit;color:inherit}
       <p class="form-msg" id="form-msg" role="status"></p>
     </div>
   </div>
+  <svg class="edge2" data-c="var(--foot-bg)" aria-hidden="true"></svg>
 </section>
 
 <footer class="brand">
-  <div class="edge"></div>
-  <p>
-    <svg viewBox="0 0 24 24" fill="#f59ab9" aria-hidden="true"><use href="#heart"/></svg>
-    Creado por <a href="https://celayre.com" target="_blank" rel="noopener">Celayre</a> · <a href="https://celayre.com" target="_blank" rel="noopener">celayre.com</a>
-    <svg viewBox="0 0 24 24" fill="#f59ab9" aria-hidden="true"><use href="#heart"/></svg>
-  </p>
+  <p>Creado por <a href="https://celayre.com" target="_blank" rel="noopener">Celayre</a> · <a href="https://celayre.com" target="_blank" rel="noopener">celayre.com</a></p>
   <nav class="social" aria-label="Redes de Celayre">
     <a href="https://www.facebook.com/celayre/" target="_blank" rel="noopener" aria-label="Celayre en Facebook">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.5V21h3z"/></svg></a>
@@ -613,6 +608,37 @@ var EVENTO = {
   document.querySelectorAll('img.feet').forEach(function(img){
     if (img.complete && img.naturalWidth) measure(img); else img.addEventListener('load', function(){ measure(img); });
   });
+})();
+
+/* ════════ DIVISIONES DE NUBE: curvas e irregulares ════════ */
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function rnd(seed){ return function(){ seed = (seed*9301 + 49297) % 233280; return seed/233280; }; }
+  function draw(svg, k){
+    var w = svg.clientWidth || window.innerWidth, h = 58;
+    var r0 = Math.max(16, Math.min(34, w*.04));
+    var curve = Math.min(24, w*.03);                 /* las orillas suben hacia los lados */
+    var R = rnd(17 + k*31);
+    function base(x){ var u = (2*x/w - 1); return h - 12 - curve*(u*u); }
+    var x = -r0*.6, y = base(x) + (R()-.5)*3, d = 'M-2 '+(h+2)+' L-2 '+y.toFixed(1)+' L'+x.toFixed(1)+' '+y.toFixed(1);
+    while (x < w + r0){
+      var r = r0*(.7 + R()*.55), c = r*(1.35 + R()*.4);
+      var x2 = x + c, y2 = base(x2) + (R()-.5)*3;
+      d += ' A'+r.toFixed(1)+' '+r.toFixed(1)+' 0 0 1 '+x2.toFixed(1)+' '+y2.toFixed(1);
+      x = x2; y = y2;
+    }
+    d += ' L'+(w+2)+' '+(h+2)+' Z';
+    svg.setAttribute('viewBox','0 0 '+w+' '+h);
+    svg.innerHTML = '';
+    var p = document.createElementNS(NS,'path');
+    p.setAttribute('d', d); p.setAttribute('fill', getComputedStyle(svg).getPropertyValue('--fill') || '#fff');
+    p.style.fill = svg.getAttribute('data-c');
+    svg.appendChild(p);
+  }
+  var edges = [].slice.call(document.querySelectorAll('.edge2'));
+  function all(){ edges.forEach(draw); }
+  all();
+  var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(all, 120); });
 })();
 
 /* ════════ TÍTULOS CURVOS ════════ */
@@ -795,7 +821,7 @@ var EVENTO = {
   function resize(){
     dpr=Math.min(window.devicePixelRatio||1,2); W=stage.clientWidth; H=stage.clientHeight;
     canvas.width=Math.round(W*dpr); canvas.height=Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
-    GROUND = H - Math.max(22, H*.12);                 /* línea donde pisa todo */
+    GROUND = H - Math.max(14, H*.055);               /* línea donde pisa todo */
     PH = Math.max(40, Math.min(80, H*.17));           /* tamaño tipo "dino" */
   }
   window.addEventListener('resize', function(){ if (modal.classList.contains('open')) resize(); });
@@ -844,19 +870,13 @@ var EVENTO = {
   function cloud(c){ var s=c.s*H/320; ctx.fillStyle='rgba(255,255,255,.95)'; ctx.beginPath();
     ctx.arc(c.x,c.y,22*s,0,7); ctx.arc(c.x+24*s,c.y-10*s,28*s,0,7); ctx.arc(c.x+52*s,c.y,22*s,0,7); ctx.rect(c.x,c.y,52*s,20*s); ctx.fill(); }
   /* Pasto hecho en código: franja inferior con bordes ondulados y briznas */
+  /* Pasto hecho en código: franja delgada que combina con la pradera */
   function grass(){
-    var top=GROUND-2, off=(dist*1)%36;
-    var g=ctx.createLinearGradient(0,top,0,H); g.addColorStop(0,'#c4e283'); g.addColorStop(1,'#a8d36d');
-    ctx.fillStyle=g; ctx.beginPath(); ctx.moveTo(0,H);
-    for (var x=-off; x<=W+36; x+=18) ctx.quadraticCurveTo(x+9, top-5, x+18, top);
-    ctx.lineTo(W+40,H); ctx.closePath(); ctx.fill();
-    ctx.strokeStyle='#8cc45c'; ctx.lineWidth=2; ctx.lineCap='round';
-    for (x=-off; x<W+36; x+=36){
-      ctx.beginPath(); ctx.moveTo(x+6,top+12); ctx.lineTo(x+3,top+5); ctx.moveTo(x+9,top+12); ctx.lineTo(x+10,top+4); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x+24,H-6); ctx.lineTo(x+21,H-13); ctx.moveTo(x+27,H-6); ctx.lineTo(x+29,H-14); ctx.stroke();
-    }
-    ctx.fillStyle='rgba(255,255,255,.25)';
-    for (x=-off*1.5; x<W+60; x+=90){ ctx.beginPath(); ctx.ellipse(x+40,top+(H-top)*.55,18,3,0,0,7); ctx.fill(); }
+    var top=GROUND-1, off=(dist*.6)%28;
+    var g=ctx.createLinearGradient(0,top,0,H); g.addColorStop(0,'#c9e488'); g.addColorStop(1,'#b2d873');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.moveTo(-30,H);
+    for (var x=-off-28; x<=W+28; x+=14) ctx.quadraticCurveTo(x+7, top-3, x+14, top);
+    ctx.lineTo(W+30,H); ctx.closePath(); ctx.fill();
   }
   function sprite(k,x,h){
     var s=SPR[k]||SPR.corre1;
@@ -897,10 +917,10 @@ var EVENTO = {
     ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     for (var i=0;i<clouds.length;i++) cloud(clouds[i]);
     if (meadow.complete && meadow.naturalWidth){
-      var mh=H*.5, mw=mh*meadow.naturalWidth/meadow.naturalHeight, off=-((dist*.35)%(mw*2)), y=GROUND-mh*.78;
-      for (var x=off; x<W; x+=mw*2){
-        ctx.drawImage(meadow,x,y,mw,mh);
-        ctx.save(); ctx.translate(x+mw*2,0); ctx.scale(-1,1); ctx.drawImage(meadow,0,y,mw,mh); ctx.restore();
+      var mh=H*.62, mw=Math.round(mh*meadow.naturalWidth/meadow.naturalHeight), off=-((dist*.6)%(mw*2)), y=GROUND-mh*.9;
+      for (var x=Math.floor(off); x<W; x+=mw*2){
+        ctx.drawImage(meadow,x,y,mw+1,mh);
+        ctx.save(); ctx.translate(x+mw*2,0); ctx.scale(-1,1); ctx.drawImage(meadow,-1,y,mw+1,mh); ctx.restore();
       }
     }
     grass();
