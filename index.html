@@ -22,13 +22,14 @@
 <style>
 :root{
   color-scheme: light;
+  --logoH: 50vh;
   /* Paleta pastel, fiel al boceto */
   --sky-top:#b9e1fb; --sky-mid:#d6eefc; --sky-low:#ecf8ff;
   --cream:#fdf8f1; --blue-bg:#e3f2fd; --play-bg:#fdf5ef; --pink-bg:#fde8ef; --foot-bg:#dcefff;
   --navy:#2a5aa8; --ink:#4a5a7c; --muted:#8193b6;
   --pink:#f27fa5; --pink-d:#e8628d; --blue:#5b9be6; --yellow:#f7c548; --green-wa:#3fc56b;
   --card-blue:#dcedfb; --card-pink:#fde1ea; --card-yel:#fdf0c9; --card-lil:#ece5fb;
-  --lh: calc(clamp(600px, 100vw, 1800px) / 3);   /* alto del paisaje de portada */
+  --lh: calc(clamp(640px, 100vw, 1800px) / 3);   /* alto del paisaje de portada */
   --mh: calc(clamp(700px, 100vw, 1800px) / 3);   /* alto de la pradera del juego */
   --pad: clamp(18px, 5vw, 40px);
 }
@@ -52,10 +53,19 @@ button,input,select{font:inherit;color:inherit}
 .arc svg{display:block;height:auto;max-width:100%;overflow:visible}
 
 /* ── Borde de nube entre secciones ── */
-.edge2{position:absolute;left:0;bottom:-1px;width:100%;height:58px;z-index:3;pointer-events:none;display:block;overflow:visible}
+.edge2{position:absolute;left:0;bottom:-1px;width:100%;height:74px;z-index:3;pointer-events:none;display:block;overflow:visible}
 
 /* ── Decoración de jardín ── */
-.deco{position:absolute;pointer-events:none;z-index:2}
+.deco{position:absolute;pointer-events:none;z-index:2;overflow:visible}
+.corner{position:absolute;bottom:20px;z-index:3;pointer-events:none;width:clamp(92px,25vw,160px)}
+.corner svg,.side svg{display:block;width:100%;height:auto;aspect-ratio:140/170;overflow:visible}
+.corner.l{left:-8px;transform:rotate(16deg);transform-origin:bottom left}
+.corner.r{right:-8px;transform:scaleX(-1) rotate(16deg);transform-origin:bottom right}
+.side{position:absolute;z-index:2;pointer-events:none;width:clamp(40px,11vw,62px)}
+.side svg{aspect-ratio:50/110}
+.side.l{left:-6px;transform:rotate(38deg);transform-origin:bottom left}
+.side.r{right:-6px;transform:scaleX(-1) rotate(38deg);transform-origin:bottom right}
+.paused .cloud,.paused .sway,.paused .petal,.paused .lf{animation-play-state:paused}
 .sway{animation:sway 5s ease-in-out infinite;transform-origin:bottom center}
 @keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
 
@@ -72,7 +82,7 @@ button,input,select{font:inherit;color:inherit}
 @keyframes drift{from{transform:translateX(-260px)}to{transform:translateX(calc(100vw + 40px))}}
 
 /* Banderines: cuelgan de cada esquina en cualquier pantalla */
-.garland{position:absolute;top:env(safe-area-inset-top,0px);z-index:4;width:clamp(150px,36vw,320px);
+.garland{position:absolute;top:env(safe-area-inset-top,0px);z-index:4;width:clamp(160px,46vw,320px);
   pointer-events:none}
 .garland svg{display:block;width:100%;height:auto;overflow:visible}
 .garland.left{left:0}
@@ -86,6 +96,10 @@ button,input,select{font:inherit;color:inherit}
 @keyframes twinkle{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(18deg) scale(1.1)}}
 
 .hero-copy{position:relative;z-index:5;padding:0 var(--pad)}
+.logo-wrap{position:relative;display:block;margin:0 auto;width:min(88vw,560px,calc(var(--logoH) * 1.25))}
+.logo{width:100%;height:auto;filter:drop-shadow(0 6px 10px rgba(42,90,168,.12));
+  animation:pop .9s cubic-bezier(.2,1.5,.4,1) both, floaty 5s ease-in-out .9s infinite}
+.lf{position:absolute;width:var(--s);height:auto;aspect-ratio:1;animation:twinkle 3.6s ease-in-out infinite;z-index:-1}
 .hero-title svg{display:block;width:min(100%,600px,62vh);height:auto;margin:0 auto;overflow:visible;
   filter:drop-shadow(0 6px 10px rgba(42,90,168,.12));
   animation:pop .9s cubic-bezier(.2,1.5,.4,1) both, floaty 5s ease-in-out .9s infinite}
@@ -96,10 +110,11 @@ button,input,select{font:inherit;color:inherit}
 
 .scene{position:relative;z-index:2;
   --pw: min(clamp(190px, 50vw, 380px), 36vh);
-  --ground: calc(var(--lh) * .04 + 24px);
+  --ground: calc(var(--lh) * .04 + 38px);
   height:max(min(var(--lh), 44vh), calc(var(--pw) * .95 + var(--ground)))}
-.landscape{position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:clamp(600px,100vw,1800px);max-width:none;z-index:0;pointer-events:none}
+.scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18px;background:#a1ca66;z-index:0}
+.landscape{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+  width:clamp(640px,100vw,1800px);max-width:none;z-index:0;pointer-events:none}
 .stand{position:absolute;z-index:1;width:var(--pw)}
 .stand::after{content:"";position:absolute;left:18%;right:18%;bottom:-6px;height:16px;border-radius:50%;
   background:radial-gradient(ellipse at center, rgba(56,98,52,.32), rgba(56,98,52,0) 70%);z-index:-1}
@@ -135,7 +150,7 @@ button,input,select{font:inherit;color:inherit}
 .music-tip.hide{opacity:0;transform:translateX(8px);pointer-events:none}
 
 /* ═════════ CUENTA REGRESIVA ═════════ */
-.countdown{position:relative;overflow:hidden;background:var(--cream);padding:clamp(30px,6vw,46px) 0 clamp(60px,11vw,86px)}
+.countdown{position:relative;overflow:hidden;background:var(--cream);padding:clamp(30px,6vw,46px) 0 clamp(96px,20vw,120px)}
 .cd{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,2.2vw,16px);
   margin:clamp(14px,3.5vw,22px) auto 0;max-width:640px;padding:0 clamp(18px,6vw,40px)}
 .cd-card{border-radius:clamp(16px,3.6vw,22px);padding:clamp(12px,3vw,20px) 4px clamp(10px,2.4vw,16px);text-align:center;
@@ -152,8 +167,8 @@ button,input,select{font:inherit;color:inherit}
 /* ═════════ FECHA Y LUGAR ═════════ */
 .info{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--blue-bg),#eef8ff);padding:clamp(34px,7vw,52px) 0 clamp(100px,22vw,140px)}
 .cloud.soft{opacity:.75}
-.bush-l,.bush-r{bottom:8px;width:clamp(110px,28vw,230px);height:clamp(66px,16.8vw,138px);z-index:2}
-.bush-l{left:0}.bush-r{right:0;transform:scaleX(-1)}
+.bush-l,.bush-r{bottom:14px;width:clamp(120px,30vw,240px);height:auto;aspect-ratio:232/146;z-index:2}
+.bush-l{left:-14px}.bush-r{right:-14px;transform:scaleX(-1)}
 .stem-b{bottom:22px;z-index:2}
 .info-card{position:relative;z-index:4;max-width:620px;margin:clamp(14px,3.5vw,22px) auto 0;background:#fff;
   border-radius:24px;padding:clamp(14px,3.6vw,24px);box-shadow:0 6px 20px rgba(74,90,124,.08)}
@@ -188,13 +203,13 @@ button,input,select{font:inherit;color:inherit}
   padding-top:clamp(30px,6vw,50px);padding-bottom:var(--grass);min-height:calc(var(--mh) * 1.15)}
 .meadow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:clamp(980px,100vw,1800px);max-width:none;z-index:0;pointer-events:none}
 .play-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;align-items:end;column-gap:clamp(0px,2vw,24px);min-height:calc(var(--mh) * 1.15 - var(--grass) - clamp(30px,6vw,50px))}
-.play-copy{grid-column:1/-1;grid-row:1;align-self:start;text-align:left;padding-top:clamp(0px,2vw,20px);position:relative;z-index:2}
-.play-title{color:var(--navy);font-family:"Baloo 2","Fredoka",sans-serif;font-weight:800;line-height:1;font-size:clamp(24px,6.6vw,44px);display:block}
+.play-copy{grid-column:1;grid-row:1;align-self:start;text-align:center;display:flex;flex-direction:column;align-items:center;padding-top:clamp(0px,2vw,20px);position:relative;z-index:2}
+.play-title{color:var(--navy);font-family:"Baloo 2","Fredoka",sans-serif;font-weight:800;line-height:1;font-size:clamp(21px,5.6vw,44px);display:flex;flex-direction:column;align-items:center}
 .play-title .line{display:flex;align-items:center;gap:.08em}
-.play-title .line + .line{margin-top:-.2em;padding-left:.2em}
+.play-title .line + .line{margin-top:-.1em}
 .play-title .spark{width:.75em;height:.75em}
-.play-copy p{margin:.45em 0 .9em;font-size:clamp(13px,3.6vw,18px);max-width:min(20em,58%)}
-.play-art{grid-column:2;grid-row:1;justify-self:end;align-self:end;width:min(108%,460px);margin-right:calc(var(--pad) * -.4)}
+.play-copy p{margin:.4em 0 .8em;font-size:clamp(13px,3.4vw,18px);max-width:17em}
+.play-art{grid-column:2;grid-row:1;justify-self:end;align-self:end;width:min(135%,560px);margin-right:calc(var(--pad) * -.5);margin-left:-20%}
 .play-art .stand{position:relative;width:100%}
 .petal{position:absolute;z-index:1;width:var(--s,18px);height:var(--s,18px);opacity:.9;animation:float var(--d,7s) ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(40deg)}}
@@ -260,7 +275,11 @@ button,input,select{font:inherit;color:inherit}
   .fact.place{grid-column:1/-1;border-left:0;border-top:2px solid #edf2f9;margin-top:10px;padding-top:12px}
 }
 @media (max-width:620px){ .actions{grid-template-columns:1fr} }
-@media (min-width:900px){ .hero{padding-top:64px} }
+@media (min-width:900px){
+  .hero{padding-top:44px}
+  :root{--logoH:46vh}
+  .scene{--pw: min(480px, 42vh)}
+}
 @media (orientation:landscape) and (max-height:520px){
   .stage{height:calc(100vh - 100px)} .panel{padding:8px} .hud{padding-bottom:6px}
 }
@@ -293,15 +312,27 @@ button,input,select{font:inherit;color:inherit}
       <path d="M25 86 C12 82 6 70 8 62 C18 64 25 74 25 86z" fill="#8fd06f"/>
       <g transform="translate(25 22)"><g fill="#ffd65c"><circle cx="0" cy="-9" r="7"/><circle cx="8.5" cy="-3" r="7"/><circle cx="5.5" cy="7" r="7"/><circle cx="-5.5" cy="7" r="7"/><circle cx="-8.5" cy="-3" r="7"/></g><circle r="5" fill="#f5a623"/></g>
     </symbol>
-    <symbol id="bush" viewBox="0 0 200 120">
-      <g>
-        <circle cx="40" cy="90" r="38" fill="#5fae5b"/><circle cx="85" cy="70" r="44" fill="#78c267"/>
-        <circle cx="135" cy="84" r="40" fill="#5fae5b"/><circle cx="175" cy="96" r="30" fill="#8fd07a"/>
-        <circle cx="70" cy="58" r="22" fill="#9bd884" opacity=".7"/><circle cx="128" cy="62" r="16" fill="#9bd884" opacity=".6"/>
-        <rect x="0" y="100" width="200" height="20" fill="#5fae5b"/>
-      </g>
-      <use href="#daisy" x="30" y="58" width="26" height="26"/><use href="#daisy" x="104" y="44" width="22" height="22"/>
-      <use href="#daisy" x="150" y="76" width="24" height="24"/><use href="#daisy" x="72" y="86" width="18" height="18"/>
+    <symbol id="cloud2" viewBox="0 0 240 80"><path d="M24 74c-13 0-22-8-22-19s9-19 21-19c4-12 15-19 28-19 9 0 17 4 22 10 6-12 19-20 34-20 17 0 31 10 35 24 4-2 9-3 14-3 14 0 26 9 28 21 3-1 6-1 9-1 13 0 23 8 23 18s-10 18-23 18H24z"/></symbol>
+    <symbol id="cloud3" viewBox="0 0 160 100"><path d="M28 92C13 92 3 82 3 69s10-22 24-22c1-21 18-38 40-38 17 0 31 10 37 24 4-2 9-3 14-3 17 0 31 13 31 30 0 2 0 4-1 6 6 4 9 10 9 17 0 12-10 21-23 21H28z"/></symbol>
+    <symbol id="cluster" viewBox="0 0 140 170">
+      <path d="M12 170C-6 150-6 128 4 116c14 12 18 34 8 54z" fill="#4fa58a"/>
+      <path d="M26 170C4 140 2 110 16 88c20 20 26 52 10 82z" fill="#6fba5c"/>
+      <path d="M44 170c0-35 15-60 38-70 2 30-12 55-38 70z" fill="#8fd06f"/>
+      <path d="M60 170c8-22 26-36 48-38-4 22-22 36-48 38z" fill="#6fba5c"/>
+      <path d="M32 170C32 130 36 100 42 72" stroke="#7cbf63" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M50 170C56 140 70 122 88 106" stroke="#7cbf63" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M20 170C17 145 15 130 12 116" stroke="#7cbf63" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <use href="#daisy" x="24" y="44" width="36" height="36"/>
+      <g transform="translate(90 100)"><g fill="#ffd65c"><circle cx="0" cy="-8" r="6.5"/><circle cx="7.6" cy="-2.5" r="6.5"/><circle cx="4.7" cy="6.5" r="6.5"/><circle cx="-4.7" cy="6.5" r="6.5"/><circle cx="-7.6" cy="-2.5" r="6.5"/></g><circle r="4.6" fill="#f5a623"/></g>
+      <use href="#daisy" x="1" y="98" width="22" height="22"/>
+    </symbol>
+    <symbol id="bush" viewBox="-6 -6 232 146">
+      <circle cx="46" cy="96" r="42" fill="#5fae5b"/><circle cx="98" cy="72" r="48" fill="#78c267"/>
+      <circle cx="152" cy="88" r="42" fill="#5fae5b"/><circle cx="192" cy="104" r="30" fill="#8fd07a"/>
+      <circle cx="82" cy="58" r="22" fill="#9bd884" opacity=".7"/><circle cx="142" cy="66" r="16" fill="#9bd884" opacity=".6"/>
+      <rect x="4" y="104" width="216" height="36" fill="#5fae5b"/>
+      <use href="#daisy" x="32" y="62" width="26" height="26"/><use href="#daisy" x="112" y="46" width="22" height="22"/>
+      <use href="#daisy" x="164" y="80" width="24" height="24"/><use href="#daisy" x="80" y="92" width="18" height="18"/>
     </symbol>
     <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.8 4.5 6.6 4.5c2.2 0 3.6 1.2 5.4 3.2 1.8-2 3.2-3.2 5.4-3.2 3.8 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z"/></symbol>
     <symbol id="sparks" viewBox="0 0 24 24"><g stroke="currentColor" stroke-width="3.2" stroke-linecap="round" fill="none"><path d="M8 5l3.5 5"/><path d="M15.5 3.5v6"/><path d="M4 13.5l6 .5"/></g></symbol>
@@ -331,79 +362,42 @@ button,input,select{font:inherit;color:inherit}
   <svg class="cloud c5" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
 
   <div class="garland left" aria-hidden="true">
-    <svg viewBox="0 0 320 120">
-      <path d="M0 4 Q160 96 320 0" fill="none" stroke="#fff" stroke-width="3"/>
-      <g class="flags" stroke="#fff" stroke-width="2" stroke-linejoin="round">
-        <path d="M14 12 L50 26 L24 62 Z" fill="#f7cf5c"/>
-        <path d="M62 31 L100 42 L74 80 Z" fill="#f59ab9"/>
-        <path d="M114 44 L154 49 L130 88 Z" fill="#78aef0"/>
-        <path d="M168 49 L208 47 L186 86 Z" fill="#c3b0f5"/>
-        <path d="M222 44 L260 35 L244 74 Z" fill="#f7cf5c"/>
-        <path d="M272 31 L306 18 L294 56 Z" fill="#f59ab9"/>
-      </g>
+    <svg viewBox="0 0 300 160">
+      <path d="M0 118 Q170 92 300 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+<g class="flags" stroke="#fff" stroke-width="2" stroke-linejoin="round">
+  <path d="M4.9 117.5 L42.3 110.6 L26.1 152.0 Z" fill="#f7cf5c"/>
+  <path d="M57.7 107.3 L94.5 97.8 L79.6 140.5 Z" fill="#f59ab9"/>
+  <path d="M108.5 93.7 L144.5 81.6 L131.0 125.7 Z" fill="#78aef0"/>
+  <path d="M157.4 76.8 L192.4 62.1 L180.3 107.4 Z" fill="#c3b0f5"/>
+  <path d="M204.3 56.5 L238.1 39.1 L227.6 85.8 Z" fill="#f7cf5c"/>
+  <path d="M246.6 34.4 L279.0 14.6 L270.1 62.5 Z" fill="#f59ab9"/>
+</g>
     </svg>
   </div>
   <div class="garland right" aria-hidden="true">
-    <svg viewBox="0 0 320 120">
-      <path d="M0 4 Q160 96 320 0" fill="none" stroke="#fff" stroke-width="3"/>
-      <g class="flags" stroke="#fff" stroke-width="2" stroke-linejoin="round">
-        <path d="M14 12 L50 26 L24 62 Z" fill="#78aef0"/>
-        <path d="M62 31 L100 42 L74 80 Z" fill="#f7cf5c"/>
-        <path d="M114 44 L154 49 L130 88 Z" fill="#f59ab9"/>
-        <path d="M168 49 L208 47 L186 86 Z" fill="#78aef0"/>
-        <path d="M222 44 L260 35 L244 74 Z" fill="#c3b0f5"/>
-        <path d="M272 31 L306 18 L294 56 Z" fill="#f7cf5c"/>
-      </g>
+    <svg viewBox="0 0 300 160">
+      <path d="M0 118 Q170 92 300 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+<g class="flags" stroke="#fff" stroke-width="2" stroke-linejoin="round">
+  <path d="M4.9 117.5 L42.3 110.6 L26.1 152.0 Z" fill="#78aef0"/>
+  <path d="M57.7 107.3 L94.5 97.8 L79.6 140.5 Z" fill="#f59ab9"/>
+  <path d="M108.5 93.7 L144.5 81.6 L131.0 125.7 Z" fill="#f7cf5c"/>
+  <path d="M157.4 76.8 L192.4 62.1 L180.3 107.4 Z" fill="#c3b0f5"/>
+  <path d="M204.3 56.5 L238.1 39.1 L227.6 85.8 Z" fill="#78aef0"/>
+  <path d="M246.6 34.4 L279.0 14.6 L270.1 62.5 Z" fill="#f59ab9"/>
+</g>
     </svg>
   </div>
 
-  <svg class="daisy-sky" style="left:6%;top:20%;--s:clamp(24px,7vw,42px)" aria-hidden="true"><use href="#daisy"/></svg>
-  <svg class="daisy-sky" style="right:7%;top:18%;--s:clamp(24px,7vw,42px);animation-delay:-1.2s" aria-hidden="true"><use href="#daisy"/></svg>
-  <svg class="daisy-sky" style="left:11%;top:40%;--s:clamp(24px,7vw,42px);animation-delay:-2s" aria-hidden="true"><use href="#daisy"/></svg>
-  <svg class="daisy-sky" style="right:12%;top:36%;--s:clamp(24px,7vw,42px);animation-delay:-.6s" aria-hidden="true"><use href="#daisy"/></svg>
-
   <div class="hero-copy">
-    <h1 class="hero-title">
-      <span class="sr">Esta aventura se llama… Majo cumple 1. Ven a celebrar su primer añito.</span>
-      <svg viewBox="0 0 600 450" aria-hidden="true">
-        <defs>
-          <linearGradient id="gPink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffa3c4"/><stop offset=".55" stop-color="#ff6a9c"/><stop offset="1" stop-color="#ef4b85"/></linearGradient>
-          <linearGradient id="gYel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe684"/><stop offset=".6" stop-color="#ffc531"/><stop offset="1" stop-color="#f5a90c"/></linearGradient>
-          <linearGradient id="gRib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9dbe"/><stop offset=".6" stop-color="#f7609a"/><stop offset="1" stop-color="#e94a83"/></linearGradient>
-          <path id="pKick" d="M30 86 Q300 22 570 86"/>
-          <path id="pCumple" d="M118 322 Q262 272 408 302"/>
-          <path id="pRib" d="M64 398 Q300 356 536 392"/>
-        </defs>
-        <g font-family="'Baloo 2','Fredoka',sans-serif" font-weight="800" font-size="42" text-anchor="middle">
-          <text fill="#fff" stroke="#fff" stroke-width="11" stroke-linejoin="round"><textPath href="#pKick" startOffset="50%">Esta aventura se llama…</textPath></text>
-          <text fill="#1d4fae"><textPath href="#pKick" startOffset="50%">Esta aventura se llama…</textPath></text>
-        </g>
-        <g font-family="'Fredoka',sans-serif" font-weight="700" text-anchor="middle" stroke-linejoin="round">
-          <g transform="rotate(-4 250 190)">
-            <text x="250" y="236" font-size="158" fill="#fff" stroke="#fff" stroke-width="26">Majo</text>
-            <text x="250" y="236" font-size="158" fill="url(#gPink)" stroke="#e23f7a" stroke-width="8">Majo</text>
-            <text x="250" y="236" font-size="158" fill="url(#gPink)">Majo</text>
-            <path d="M236 60c-9-10-26-4-24 10 2 11 24 23 24 23s22-12 24-23c2-14-15-20-24-10z" fill="#ff4f8b" stroke="#fff" stroke-width="5" transform="translate(66 40) scale(.8)"/>
-          </g>
-          <text font-size="84" fill="#fff" stroke="#fff" stroke-width="22"><textPath href="#pCumple" startOffset="50%">cumple</textPath></text>
-          <text font-size="84" fill="url(#gPink)" stroke="#e23f7a" stroke-width="8"><textPath href="#pCumple" startOffset="50%">cumple</textPath></text>
-            <text font-size="84" fill="url(#gPink)"><textPath href="#pCumple" startOffset="50%">cumple</textPath></text>
-          <g class="one-hop">
-            <g transform="rotate(7 490 220)">
-              <text x="490" y="334" font-size="290" fill="#fff" stroke="#fff" stroke-width="26">1</text>
-              <text x="490" y="334" font-size="290" fill="url(#gYel)" stroke="#eba000" stroke-width="8">1</text>
-            <text x="490" y="334" font-size="290" fill="url(#gYel)">1</text>
-            </g>
-          </g>
-        </g>
-        <path d="M64 398 Q300 356 536 392" fill="none" stroke="#fff" stroke-width="68" stroke-linecap="round"/>
-        <path d="M64 404 Q300 362 536 398" fill="none" stroke="#d63a72" stroke-width="56" stroke-linecap="round" opacity=".55"/>
-        <path d="M64 398 Q300 356 536 392" fill="none" stroke="url(#gRib)" stroke-width="56" stroke-linecap="round"/>
-        <path d="M120 380 Q300 350 480 376" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".35"/>
-        <text font-family="'Baloo 2','Fredoka',sans-serif" font-weight="700" font-size="30" fill="#fff" text-anchor="middle" dy="10"><textPath href="#pRib" startOffset="50%">Ven a celebrar su primer añito</textPath></text>
-        <path d="M0-6c-4-5-12-2-11 5 1 5 11 11 11 11s10-6 11-11c1-7-7-10-11-5z" fill="#fff1b8" transform="translate(78 393) scale(1.1)"/>
-        <path d="M0-6c-4-5-12-2-11 5 1 5 11 11 11 11s10-6 11-11c1-7-7-10-11-5z" fill="#fff1b8" transform="translate(522 387) scale(1.1)"/>
-      </svg>
+    <h1 class="logo-wrap">
+      <span class="sr">Este episodio de fiesta se llama… Majo cumple 1. Ven a celebrar su primer añito.</span>
+      <img class="logo" src="assets/img/logo.png" alt="" width="1402" height="1122">
+      <svg class="lf" style="left:-7%;top:3%;--s:9%" aria-hidden="true"><use href="#daisy"/></svg>
+      <svg class="lf" style="right:-7%;top:1%;--s:9%;animation-delay:-1.4s" aria-hidden="true"><use href="#daisy"/></svg>
+      <svg class="lf" style="left:-4%;top:40%;--s:6.5%;animation-delay:-.7s" aria-hidden="true"><use href="#daisy"/></svg>
+      <svg class="lf" style="right:-4%;top:36%;--s:6.5%;animation-delay:-2.1s" aria-hidden="true"><use href="#daisy"/></svg>
+      <svg class="lf" style="left:3%;top:68%;--s:4.5%;animation-delay:-1s" aria-hidden="true"><use href="#daisy"/></svg>
+      <svg class="lf" style="right:2%;top:66%;--s:4.5%;animation-delay:-2.6s" aria-hidden="true"><use href="#daisy"/></svg>
     </h1>
   </div>
 
@@ -419,14 +413,15 @@ button,input,select{font:inherit;color:inherit}
 
 <!-- ═════════ CUENTA REGRESIVA ═════════ -->
 <section class="countdown" id="cuenta" aria-labelledby="t-cd">
-  <svg class="deco sway" style="left:2px;bottom:16px;width:clamp(30px,8vw,52px);height:clamp(66px,17vw,114px)" aria-hidden="true"><use href="#stem-y"/></svg>
-  <svg class="deco sway" style="left:clamp(18px,5vw,40px);bottom:14px;width:clamp(22px,6vw,38px);height:clamp(48px,13vw,84px);animation-delay:-2s" aria-hidden="true"><use href="#stem"/></svg>
-  <svg class="deco sway" style="right:2px;bottom:16px;width:clamp(30px,8vw,52px);height:clamp(66px,17vw,114px);animation-delay:-1s" aria-hidden="true"><use href="#stem"/></svg>
-  <svg class="deco sway" style="right:clamp(18px,5vw,40px);bottom:14px;width:clamp(22px,6vw,38px);height:clamp(48px,13vw,84px);animation-delay:-3s" aria-hidden="true"><use href="#stem-y"/></svg>
+  <svg class="cloud" style="top:10%;width:110px;fill:#fff;opacity:.6;animation-duration:110s;animation-delay:-30s" viewBox="0 0 160 100" aria-hidden="true"><use href="#cloud3"/></svg>
+  <div class="side l" style="bottom:46%"><svg class="sway" aria-hidden="true"><use href="#stem-y"/></svg></div>
+  <div class="side r" style="bottom:42%"><svg class="sway" style="animation-delay:-2s" aria-hidden="true"><use href="#stem"/></svg></div>
+  <div class="corner l"><svg class="sway" aria-hidden="true"><use href="#cluster"/></svg></div>
+  <div class="corner r"><svg class="sway" style="animation-delay:-1.6s" aria-hidden="true"><use href="#cluster"/></svg></div>
   <div class="wrap">
     <h2 id="t-cd" class="sec-title" aria-label="Cuenta regresiva">
       <svg class="spark" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg>
-      <span class="arc" data-bend=".04">Cuenta regresiva</span>
+      <span class="arc" data-bend=".012">Cuenta regresiva</span>
       <svg class="spark r" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg>
     </h2>
   </div>
@@ -442,15 +437,23 @@ button,input,select{font:inherit;color:inherit}
 
 <!-- ═════════ FECHA Y LUGAR ═════════ -->
 <section class="info" aria-labelledby="t-info">
-  <svg class="cloud soft" style="top:8%;width:130px;animation-duration:90s;animation-delay:-20s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
-  <svg class="cloud soft" style="top:30%;width:180px;animation-duration:120s;animation-delay:-70s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
-  <svg class="cloud soft" style="top:58%;width:110px;animation-duration:100s;animation-delay:-45s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
-  <svg class="deco bush-l" aria-hidden="true"><use href="#bush"/></svg>
-  <svg class="deco bush-r" aria-hidden="true"><use href="#bush"/></svg>
+  <svg class="cloud soft" style="top:5%;width:120px;animation-duration:95s;animation-delay:-20s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="cloud soft" style="top:20%;width:190px;animation-duration:130s;animation-delay:-80s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
+  <svg class="cloud soft" style="top:38%;width:100px;animation-duration:85s;animation-delay:-50s" viewBox="0 0 160 100" aria-hidden="true"><use href="#cloud3"/></svg>
+  <svg class="cloud soft" style="top:55%;width:150px;animation-duration:115s;animation-delay:-10s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
+  <svg class="cloud soft" style="top:70%;width:90px;animation-duration:100s;animation-delay:-65s" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="deco bush-l" viewBox="-6 -6 232 146" aria-hidden="true"><use href="#bush"/></svg>
+  <svg class="deco bush-r" viewBox="-6 -6 232 146" aria-hidden="true"><use href="#bush"/></svg>
+  <div class="side l" style="bottom:52%"><svg class="sway" aria-hidden="true"><use href="#stem"/></svg></div>
+  <div class="side r" style="bottom:56%"><svg class="sway" style="animation-delay:-1.2s" aria-hidden="true"><use href="#stem-y"/></svg></div>
+  <div class="side l" style="bottom:36%;width:clamp(24px,6vw,40px)"><svg class="sway" style="animation-delay:-2.4s" aria-hidden="true"><use href="#stem-y"/></svg></div>
+  <div class="side r" style="bottom:32%;width:clamp(24px,6vw,40px)"><svg class="sway" style="animation-delay:-.6s" aria-hidden="true"><use href="#stem"/></svg></div>
+  <div class="corner l" style="bottom:30px"><svg class="sway" aria-hidden="true"><use href="#cluster"/></svg></div>
+  <div class="corner r" style="bottom:30px"><svg class="sway" style="animation-delay:-2s" aria-hidden="true"><use href="#cluster"/></svg></div>
   <div class="wrap">
     <h2 id="t-info" class="sec-title" aria-label="Fecha y lugar">
       <svg class="spark" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
-      <span class="arc" data-bend=".04">Fecha y lugar</span>
+      <span class="arc" data-bend=".012">Fecha y lugar</span>
       <svg class="spark r" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
     </h2>
     <div class="info-card">
@@ -494,8 +497,8 @@ button,input,select{font:inherit;color:inherit}
   <div class="wrap play-grid">
     <div class="play-copy">
       <h2 id="t-play" class="play-title" aria-label="Una pequeña aventura para jugar">
-        <span class="line"><span class="arc" data-bend=".035">Una pequeña aventura</span><svg class="spark r" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg></span>
-        <span class="line"><svg class="spark" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg><span class="arc" data-bend=".03" data-accent="jugar">para jugar</span></span>
+        <span class="line"><span class="arc" data-bend=".012">Una pequeña aventura</span><svg class="spark r" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg></span>
+        <span class="line"><svg class="spark" style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg><span class="arc" data-bend=".012" data-accent="jugar">para jugar</span></span>
       </h2>
       <p>Salta los regalos, atrapa globos y llega a la fiesta.</p>
       <button class="btn btn-yel" id="btn-play" type="button">
@@ -512,14 +515,17 @@ button,input,select{font:inherit;color:inherit}
 
 <!-- ═════════ CONFIRMACIÓN ═════════ -->
 <section class="rsvp" aria-labelledby="t-rsvp">
-  <svg class="deco bush-l" aria-hidden="true"><use href="#bush"/></svg>
-  <svg class="deco bush-r" aria-hidden="true"><use href="#bush"/></svg>
-  <svg class="deco sway stem-b" style="left:clamp(70px,20vw,170px);width:clamp(24px,6vw,40px);height:clamp(54px,13vw,88px)" aria-hidden="true"><use href="#stem-y"/></svg>
-  <svg class="deco sway stem-b" style="right:clamp(70px,20vw,170px);width:clamp(24px,6vw,40px);height:clamp(54px,13vw,88px);animation-delay:-2s" aria-hidden="true"><use href="#stem"/></svg>
+  <svg class="cloud" style="top:8%;width:120px;fill:#fff;opacity:.55;animation-duration:120s;animation-delay:-40s" viewBox="0 0 240 80" aria-hidden="true"><use href="#cloud2"/></svg>
+  <svg class="deco bush-l" viewBox="-6 -6 232 146" aria-hidden="true"><use href="#bush"/></svg>
+  <svg class="deco bush-r" viewBox="-6 -6 232 146" aria-hidden="true"><use href="#bush"/></svg>
+  <div class="side l" style="bottom:50%"><svg class="sway" aria-hidden="true"><use href="#stem-y"/></svg></div>
+  <div class="side r" style="bottom:46%"><svg class="sway" style="animation-delay:-1.8s" aria-hidden="true"><use href="#stem"/></svg></div>
+  <div class="corner l" style="bottom:30px"><svg class="sway" aria-hidden="true"><use href="#cluster"/></svg></div>
+  <div class="corner r" style="bottom:30px"><svg class="sway" style="animation-delay:-2.2s" aria-hidden="true"><use href="#cluster"/></svg></div>
   <div class="wrap">
     <h2 id="t-rsvp" class="sec-title" aria-label="Confirma tu asistencia">
       <svg class="spark" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
-      <span class="arc" data-bend=".035">Confirma tu asistencia</span>
+      <span class="arc" data-bend=".012">Confirma tu asistencia</span>
       <svg class="spark r" style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
     </h2>
     <p class="lead">Nos encantaría compartir este día tan especial contigo. ¡Te esperamos!</p>
@@ -615,14 +621,14 @@ var EVENTO = {
   var NS='http://www.w3.org/2000/svg';
   function rnd(seed){ return function(){ seed = (seed*9301 + 49297) % 233280; return seed/233280; }; }
   function draw(svg, k){
-    var w = svg.clientWidth || window.innerWidth, h = 58;
-    var r0 = Math.max(16, Math.min(34, w*.04));
+    var w = svg.clientWidth || window.innerWidth, h = 74;
+    var r0 = Math.max(26, Math.min(48, w*.055));
     var curve = Math.min(24, w*.03);                 /* las orillas suben hacia los lados */
     var R = rnd(17 + k*31);
-    function base(x){ var u = (2*x/w - 1); return h - 12 - curve*(u*u); }
+    function base(x){ var u = (2*x/w - 1); return h - 14 - curve*(u*u); }
     var x = -r0*.6, y = base(x) + (R()-.5)*3, d = 'M-2 '+(h+2)+' L-2 '+y.toFixed(1)+' L'+x.toFixed(1)+' '+y.toFixed(1);
     while (x < w + r0){
-      var r = r0*(.7 + R()*.55), c = r*(1.35 + R()*.4);
+      var r = r0*(.75 + R()*.5), c = r*(1.25 + R()*.35);
       var x2 = x + c, y2 = base(x2) + (R()-.5)*3;
       d += ' A'+r.toFixed(1)+' '+r.toFixed(1)+' 0 0 1 '+x2.toFixed(1)+' '+y2.toFixed(1);
       x = x2; y = y2;
@@ -631,14 +637,27 @@ var EVENTO = {
     svg.setAttribute('viewBox','0 0 '+w+' '+h);
     svg.innerHTML = '';
     var p = document.createElementNS(NS,'path');
-    p.setAttribute('d', d); p.setAttribute('fill', getComputedStyle(svg).getPropertyValue('--fill') || '#fff');
+    p.setAttribute('d', d);
     p.style.fill = svg.getAttribute('data-c');
+    p.setAttribute('stroke','rgba(255,255,255,.75)'); p.setAttribute('stroke-width','8');
+    p.setAttribute('stroke-linejoin','round'); p.setAttribute('paint-order','stroke');
     svg.appendChild(p);
   }
   var edges = [].slice.call(document.querySelectorAll('.edge2'));
   function all(){ edges.forEach(draw); }
   all();
   var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(all, 120); });
+})();
+
+/* ════════ AHORRO: animaciones solo en la sección visible ════════
+   Las nubes son animaciones CSS (no crean elementos nuevos ni acumulan memoria);
+   además se pausan cuando su sección sale de la pantalla. */
+(function(){
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ e.target.classList.toggle('paused', !e.isIntersecting); });
+  }, {rootMargin:'80px'});
+  document.querySelectorAll('header.hero, section').forEach(function(el){ io.observe(el); });
 })();
 
 /* ════════ TÍTULOS CURVOS ════════ */
@@ -687,11 +706,15 @@ var EVENTO = {
 /* ════════ FLECHA: BAJADA SUAVE AL CONTADOR ════════ */
 (function(){
   document.getElementById('down').addEventListener('click', function(){
-    var target = document.getElementById('cuenta').getBoundingClientRect().top + window.pageYOffset - 10;
-    var start = window.pageYOffset, dist = target - start, t0 = null, dur = 1300;
+    var target = document.getElementById('cuenta').getBoundingClientRect().top + window.pageYOffset - 6;
+    var start = window.pageYOffset, dist = target - start, t0 = null, stop = false;
+    var dur = Math.max(900, Math.min(1500, Math.abs(dist) * 1.3));
     if (matchMedia('(prefers-reduced-motion: reduce)').matches){ window.scrollTo(0,target); return; }
-    function ease(t){ return 1 - Math.pow(1 - t, 4); }      /* rápido al inicio, suave al llegar */
+    function cancel(){ stop = true; }
+    ['wheel','touchstart','keydown'].forEach(function(ev){ window.addEventListener(ev, cancel, {once:true, passive:true}); });
+    function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; }   /* arranca suave, frena suave */
     function step(ts){
+      if (stop) return;
       if (!t0) t0 = ts;
       var p = Math.min(1, (ts - t0) / dur);
       window.scrollTo(0, start + dist * ease(p));
@@ -832,7 +855,7 @@ var EVENTO = {
   function reset(){
     p={x:0,y:0,vy:0,ground:true,shown:0}; obs=[]; balloons=[]; bits=[]; pops=[];
     clouds=[{x:W*.2,y:H*.14,s:1},{x:W*.62,y:H*.08,s:.7},{x:W*1.02,y:H*.24,s:.85}];
-    speed=H*.85; dist=0; gap=W*1.1; bGap=W*.8; bonus=0; t=0; scoreEl.textContent='0';
+    speed=H*.72; dist=0; gap=W*1.2; bGap=0; bonus=0; t=0; scoreEl.textContent='0';
   }
   function jump(){
     if (state!=='play'){ if (state==='over') reset(); state='play'; veil.classList.add('hidden'); veil.classList.remove('over'); }
@@ -886,16 +909,24 @@ var EVENTO = {
 
   function frame(now){ raf=requestAnimationFrame(frame); var dt=Math.min(.033,(now-last)/1000||0); last=now; if(state==='play') update(dt); draw(); }
   function update(dt){
-    t+=dt; speed=Math.min(H*2.2, speed + H*.018*dt); dist+=speed*dt;
+    t+=dt;
+    speed = H*.72*(1 + Math.min(1.4, t/70));          /* sube poco a poco, como Dino */
+    dist+=speed*dt;
     p.vy+=H*7.2*dt; p.y+=p.vy*dt; if (p.y>=0){ p.y=0; p.vy=0; p.ground=true; }
+    var air = 2*2.25/7.2;                               /* segundos en el aire */
     gap-=speed*dt;
     if (gap<=0){
-      var big=Math.random()<.4, h=PH*(big?.62:.48), w=h*(big?.9:1.05);
+      var level = Math.min(1, t/60);
+      var big = Math.random() < .15 + level*.35, h=PH*(big?.6:.46), w=h*(big?.9:1.05);
       obs.push({x:W+10,w:w,h:h,k:Math.random()<.5?'gift':'cake',c1:['#78aef0','#c3b0f5','#f7cf5c'][Math.floor(Math.random()*3)]});
-      gap = speed*.8 + W*.25 + Math.random()*W*.55;
+      var slack = W*(.55 - .3*level);                   /* al inicio hay mucho espacio */
+      gap = speed*(air + .55) + slack + Math.random()*W*.45;
+      /* globo a la mitad del hueco: al bajar no hay obstáculo */
+      if (Math.random() < .55){
+        balloons.push({x:W+10+w+gap*.5, y:GROUND-PH*(1.3+Math.random()*.5), r:PH*.2,
+          c:['#f59ab9','#78aef0','#f7cf5c'][Math.floor(Math.random()*3)], ph:Math.random()*6});
+      }
     }
-    bGap-=speed*dt;
-    if (bGap<=0){ balloons.push({x:W+20,y:GROUND-PH*(1.5+Math.random()*.8),r:PH*.2,c:['#f59ab9','#78aef0','#f7cf5c'][Math.floor(Math.random()*3)],ph:Math.random()*6}); bGap=W*(.7+Math.random()*.9); }
     var i;
     for (i=obs.length-1;i>=0;i--){ obs[i].x-=speed*dt; if (obs[i].x<-obs[i].w-20) obs.splice(i,1); }
     for (i=balloons.length-1;i>=0;i--){ var b=balloons[i]; b.x-=speed*dt; b.ph+=dt*3; b.y+=Math.sin(b.ph)*.35; if (b.x<-40) balloons.splice(i,1); }
