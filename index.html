@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¡Majo cumple 1! · Invitación</title>
+<meta name="description" content="Ven a celebrar el primer añito de Majo. Domingo 8 de noviembre, 2:30 pm.">
+<meta name="theme-color" content="#bfe6ff">
+<meta property="og:title" content="¡Majo cumple 1!">
+<meta property="og:description" content="Ven a celebrar su primer añito · Domingo 8 de noviembre, 2:30 pm">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --sky-top:#a9dcff; --sky-mid:#cdeeff; --sky-low:#eaf8ff;
+  --cream:#fffaf3; --blush:#fff0f4;
+  --pink:#ff6f9f; --pink-d:#e9467f; --pink-l:#ffd3e1;
+  --navy:#1d4fae; --blue:#3a8cf0; --blue-l:#d6ecff;
+  --yellow:#ffc531; --yellow-d:#f0a400; --yellow-l:#fff1c4;
+  --lilac:#8f6ff0; --lilac-l:#ebe3ff;
+  --leaf:#5fb35a; --ink:#33456b;
+  --lh: calc(clamp(600px, 100vw, 1800px) / 3);   /* alto del paisaje */
+  --pad: clamp(18px, 5vw, 40px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--ink); background:var(--cream);
+  overflow-x:hidden; line-height:1.5;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+img{max-width:100%;display:block}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--navy);outline-offset:3px;border-radius:12px}
+
+.disp{font-family:"Fredoka","Nunito",system-ui,sans-serif;font-weight:700;line-height:1.05}
+.wrap{width:min(100%, 980px);margin:0 auto;padding:0 var(--pad)}
+
+/* ── Títulos de sección con chispitas ── */
+.sec-title{
+  display:flex;align-items:center;justify-content:center;gap:.5em;
+  color:var(--navy);font-size:clamp(26px,6.4vw,40px);text-align:center;
+  text-shadow:0 .06em 0 #fff, .05em 0 0 #fff, -.05em 0 0 #fff, 0 -.05em 0 #fff;
+}
+.sec-title svg{width:.9em;height:.9em;flex:none}
+.sec-title svg:last-child{transform:scaleX(-1)}
+
+/* ── Borde de nube entre secciones ── */
+.edge{
+  position:absolute;left:0;right:0;height:38px;z-index:3;pointer-events:none;
+  background:radial-gradient(circle at 50% 100%, var(--c) 33px, transparent 34px) 0 0 / 66px 38px repeat-x,
+             radial-gradient(circle at 50% 100%, var(--c) 24px, transparent 25px) 33px 10px / 66px 28px repeat-x;
+}
+.edge.bottom{bottom:-1px}
+.edge.top{top:-37px}
+
+/* ═════════ PORTADA ═════════ */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-mid) 45%,var(--sky-low) 100%);
+  padding-top:calc(env(safe-area-inset-top,0px) + clamp(56px,12vw,90px));
+  text-align:center;
+}
+.cloud{position:absolute;left:0;z-index:0;fill:#fff;opacity:.95;will-change:transform;
+  animation:drift linear infinite}
+.cloud.c1{top:9%;width:150px;animation-duration:70s;animation-delay:-10s}
+.cloud.c2{top:24%;width:210px;animation-duration:95s;animation-delay:-60s;opacity:.85}
+.cloud.c3{top:40%;width:120px;animation-duration:60s;animation-delay:-35s;opacity:.8}
+.cloud.c4{top:5%;width:110px;animation-duration:110s;animation-delay:-85s;opacity:.7}
+.cloud.c5{top:32%;width:170px;animation-duration:80s;animation-delay:-5s;opacity:.9}
+@keyframes drift{from{transform:translateX(-260px)}to{transform:translateX(calc(100vw + 40px))}}
+
+.garland{position:absolute;top:0;z-index:4;width:clamp(150px,34vw,300px);
+  transform-origin:top left;animation:swing 4.5s ease-in-out infinite}
+.garland.left{left:0}
+.garland.right{right:0;transform-origin:top right;animation-delay:-2.2s}
+.garland.right svg{transform:scaleX(-1)}
+@keyframes swing{0%,100%{transform:rotate(0)}50%{transform:rotate(2.2deg)}}
+.garland.right{animation-name:swingR}
+@keyframes swingR{0%,100%{transform:rotate(0)}50%{transform:rotate(-2.2deg)}}
+
+.daisy-sky{position:absolute;z-index:1;width:var(--s,26px);animation:twinkle 3.6s ease-in-out infinite}
+@keyframes twinkle{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(18deg) scale(1.08)}}
+
+.hero-copy{position:relative;z-index:5;padding:0 var(--pad)}
+.kicker{color:var(--navy);font-size:clamp(22px,5.6vw,34px);font-weight:600;
+  text-shadow:0 .07em 0 #fff,.06em 0 0 #fff,-.06em 0 0 #fff,0 -.06em 0 #fff}
+
+.title{
+  display:inline-grid;grid-template-columns:auto auto;align-items:end;
+  margin:.15em auto 0;position:relative;
+}
+.title span{display:block;
+  --o:.055em; --d:.04em;
+  text-shadow:
+    var(--o) 0 0 #fff, calc(var(--o)*-1) 0 0 #fff, 0 var(--o) 0 #fff, 0 calc(var(--o)*-1) 0 #fff,
+    var(--d) var(--d) 0 #fff, calc(var(--d)*-1) var(--d) 0 #fff, var(--d) calc(var(--d)*-1) 0 #fff, calc(var(--d)*-1) calc(var(--d)*-1) 0 #fff,
+    0 .1em 0 #fff, 0 .14em .1em rgba(233,70,127,.25);
+}
+.t-majo{grid-column:1;grid-row:1;color:var(--pink);font-size:clamp(76px,21vw,150px);
+  letter-spacing:-.01em;transform:rotate(-3deg)}
+.t-cumple{grid-column:1;grid-row:2;color:var(--pink-d);font-size:clamp(40px,11vw,80px);
+  margin-top:-.18em;transform:rotate(-4deg) translateX(.25em)}
+.t-one{grid-column:2;grid-row:1/3;color:var(--yellow);font-size:clamp(130px,36vw,260px);
+  line-height:.85;margin-left:.04em;transform:rotate(6deg);
+  animation:hop 2.8s ease-in-out infinite}
+.t-one{text-shadow:
+    .045em 0 0 #fff,-.045em 0 0 #fff,0 .045em 0 #fff,0 -.045em 0 #fff,
+    .032em .032em 0 #fff,-.032em .032em 0 #fff,.032em -.032em 0 #fff,-.032em -.032em 0 #fff,
+    0 .07em 0 #fff, 0 .1em .06em rgba(240,164,0,.3)}
+@keyframes hop{0%,100%{transform:rotate(6deg) translateY(0)}50%{transform:rotate(3deg) translateY(-6px)}}
+.heart-top{position:absolute;left:44%;top:-.05em;width:clamp(22px,6vw,40px);z-index:2}
+
+.ribbon{
+  position:relative;display:inline-flex;align-items:center;gap:.6em;
+  margin:clamp(6px,2vw,14px) auto 0;padding:.5em 1.1em .55em;
+  background:linear-gradient(180deg,#ff8fb4,var(--pink) 55%,var(--pink-d));
+  color:#fff;font-size:clamp(14px,3.9vw,26px);font-weight:600;white-space:nowrap;
+  border-radius:999px;transform:rotate(-2deg);
+  box-shadow:0 4px 0 #d23b72, 0 10px 18px rgba(233,70,127,.25), inset 0 2px 0 rgba(255,255,255,.45);
+  border:3px solid #fff;
+}
+.ribbon svg{width:1em;height:1em;flex:none}
+
+.scene{
+  position:relative;z-index:2;
+  min-height:var(--lh);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:calc(var(--lh) * .13);
+  margin-top:clamp(14px,3vw,26px);
+}
+.landscape{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:clamp(600px,100vw,1800px);max-width:none;z-index:0;pointer-events:none;
+}
+.pair{
+  position:relative;z-index:1;width:min(80vw,470px);
+  animation:bob 3.2s ease-in-out infinite;transform-origin:bottom center;
+  filter:drop-shadow(0 10px 8px rgba(40,90,40,.18));
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.slot-missing{display:none!important}
+
+/* ═════════ CUENTA REGRESIVA ═════════ */
+.countdown{position:relative;background:var(--cream);padding:clamp(30px,6vw,48px) 0 clamp(54px,10vw,80px)}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,2.4vw,18px);
+  margin-top:clamp(16px,4vw,26px)}
+.cd-card{
+  border-radius:clamp(18px,4vw,26px);padding:clamp(12px,3vw,22px) 4px clamp(10px,2.6vw,18px);
+  text-align:center;border:3px solid #fff;
+  box-shadow:0 6px 0 var(--sh), 0 12px 22px rgba(51,69,107,.08);
+}
+.cd-card .n{font-family:"Fredoka",sans-serif;font-weight:700;font-size:clamp(32px,9vw,58px);line-height:1;
+  font-variant-numeric:tabular-nums}
+.cd-card .l{font-weight:800;font-size:clamp(12px,3.2vw,16px);margin-top:.2em}
+.cd-card svg{width:clamp(14px,3.6vw,20px);height:clamp(14px,3.6vw,20px);margin:.35em auto 0;display:block}
+.c-blue{background:var(--blue-l);color:var(--navy);--sh:#b3d6fb}
+.c-pink{background:var(--pink-l);color:var(--pink-d);--sh:#ffb3cb}
+.c-yel{background:var(--yellow-l);color:#d98a00;--sh:#ffe08a}
+.c-lil{background:var(--lilac-l);color:var(--lilac);--sh:#d3c6ff}
+.cd-done{display:none;text-align:center;margin-top:18px;font-size:clamp(24px,6vw,36px);color:var(--pink-d)}
+
+/* ═════════ FECHA Y LUGAR ═════════ */
+.info{position:relative;background:linear-gradient(180deg,#dff2ff,#eef9ff);padding:clamp(34px,7vw,56px) 0 clamp(60px,11vw,90px)}
+.info .edge.top{--c:#dff2ff}
+.info-card{
+  margin-top:clamp(16px,4vw,26px);background:#fff;border-radius:28px;
+  padding:clamp(16px,4vw,26px);box-shadow:0 8px 0 #cfe6fb, 0 16px 30px rgba(51,69,107,.08);
+}
+.facts{display:grid;grid-template-columns:1.15fr 1fr 1.25fr;gap:0}
+.fact{display:flex;gap:.6em;align-items:flex-start;padding:4px clamp(8px,2vw,16px)}
+.fact + .fact{border-left:2px solid #e6eef8}
+.fact svg{width:clamp(24px,6vw,32px);height:clamp(24px,6vw,32px);flex:none;margin-top:2px}
+.fact .k{font-size:clamp(12px,3vw,14px);font-weight:800;color:#7b8bab}
+.fact .v{font-family:"Fredoka",sans-serif;font-weight:600;color:var(--navy);font-size:clamp(16px,4.2vw,22px);line-height:1.15}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,2.5vw,16px);margin-top:clamp(16px,4vw,22px)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+  border:0;cursor:pointer;text-decoration:none;color:#fff;font-family:"Fredoka",sans-serif;font-weight:600;
+  font-size:clamp(16px,4.2vw,20px);padding:.75em 1.1em;border-radius:999px;
+  transition:transform .12s ease, box-shadow .12s ease;-webkit-tap-highlight-color:transparent;
+  min-height:52px;line-height:1.15;
+}
+@media (max-width:420px){.actions .btn{font-size:15px;padding:.7em .8em;gap:.4em}}
+.btn svg{width:1.15em;height:1.15em;flex:none}
+.btn:active{transform:translateY(3px)}
+.btn-pink{background:linear-gradient(180deg,#ff8db2,var(--pink-d));box-shadow:0 5px 0 #c9346a}
+.btn-pink:active{box-shadow:0 2px 0 #c9346a}
+.btn-blue{background:linear-gradient(180deg,#5aa6ff,#2f74e0);box-shadow:0 5px 0 #1f56b5}
+.btn-blue:active{box-shadow:0 2px 0 #1f56b5}
+.btn-yel{background:linear-gradient(180deg,#ffd75a,var(--yellow-d));box-shadow:0 6px 0 #c98400;color:#fff;
+  font-size:clamp(22px,6vw,30px);padding:.55em 1.4em;text-shadow:0 2px 0 rgba(180,110,0,.4)}
+.btn-yel:active{box-shadow:0 2px 0 #c98400}
+
+/* ═════════ JUEGO ═════════ */
+.play{position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#fff4f0 0%,#fff 40%,#eaf8ff 100%);
+  padding:clamp(36px,7vw,56px) 0 0}
+.play .edge.top{--c:#fff4f0}
+.play-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:clamp(6px,2vw,24px)}
+.play h2{color:var(--navy);font-size:clamp(25px,6.4vw,42px);text-align:left}
+.play h2 em{font-style:normal;color:var(--pink-d)}
+.play p{margin:.6em 0 1.1em;font-size:clamp(14px,3.6vw,18px)}
+.play-art{position:relative}
+.play-art img{width:100%;animation:bob 3.6s ease-in-out infinite;animation-delay:-1s;
+  filter:drop-shadow(0 8px 6px rgba(40,90,40,.15))}
+.meadow-wrap{position:relative;height:calc(clamp(700px,100vw,1800px)/3*.55);margin-top:calc(clamp(700px,100vw,1800px)/3*-.22);z-index:1;pointer-events:none}
+.meadow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:clamp(700px,100vw,1800px);max-width:none}
+
+/* ═════════ CONFIRMACIÓN ═════════ */
+.rsvp{position:relative;background:linear-gradient(180deg,#ffe6ef,#fff3f7);padding:clamp(40px,8vw,64px) 0 clamp(50px,9vw,70px);text-align:center}
+.rsvp .edge.top{--c:#ffe6ef}
+.rsvp p.lead{margin:.4em auto 0;max-width:34em;font-size:clamp(15px,3.8vw,18px)}
+.form{display:grid;gap:12px;max-width:520px;margin:clamp(18px,4vw,26px) auto 0;text-align:left}
+.form label{font-weight:800;font-size:14px;color:var(--pink-d);padding-left:6px}
+.field{width:100%;min-height:54px;border-radius:18px;border:3px solid #fff;background:#fff;
+  padding:.7em 1em;font-size:17px;box-shadow:0 4px 0 #ffc6d8;appearance:none;-webkit-appearance:none}
+.field:focus{outline:none;border-color:var(--pink)}
+.select-wrap{position:relative}
+.select-wrap::after{content:"";position:absolute;right:18px;top:50%;width:10px;height:10px;
+  border-right:3px solid var(--pink-d);border-bottom:3px solid var(--pink-d);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.form .btn{margin-top:8px;width:100%}
+.form-msg{min-height:1.4em;font-weight:700;color:var(--pink-d);text-align:center;font-size:15px}
+
+footer{background:#fff3f7;text-align:center;padding:18px var(--pad) calc(22px + env(safe-area-inset-bottom,0px));
+  font-size:14px;color:#8a97b5}
+footer a{color:var(--navy);font-weight:800;text-decoration:none}
+footer svg{width:12px;height:12px;vertical-align:-1px;margin:0 .4em}
+
+/* ═════════ MODAL DEL JUEGO ═════════ */
+.game{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
+  background:rgba(29,79,174,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  padding:calc(env(safe-area-inset-top,0px) + 12px) 12px calc(env(safe-area-inset-bottom,0px) + 12px)}
+.game.open{display:flex}
+.panel{width:min(100%,860px);background:#fff;border-radius:28px;padding:14px;border:4px solid #fff;
+  box-shadow:0 10px 0 #b9dbff, 0 30px 60px rgba(0,0,0,.2);position:relative}
+.hud{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 6px 10px}
+.hud .disp{color:var(--navy);font-size:clamp(18px,4.6vw,24px)}
+.scores{display:flex;gap:8px}
+.chip{background:var(--yellow-l);color:#c27c00;border-radius:999px;padding:4px 12px;font-weight:800;font-size:14px;white-space:nowrap}
+.chip.b{background:var(--blue-l);color:var(--navy)}
+.close{width:42px;height:42px;border-radius:50%;border:0;background:var(--pink-l);color:var(--pink-d);
+  font-size:24px;line-height:1;cursor:pointer;flex:none;font-weight:800}
+.stage{position:relative;border-radius:20px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;
+  height:min(58vh,420px);background:var(--sky-mid);cursor:pointer}
+.stage canvas{width:100%;height:100%;display:block}
+.veil{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:6px;padding:16px;background:rgba(255,255,255,.55);transition:opacity .25s}
+.veil.hidden{opacity:0;pointer-events:none}
+.veil .big{font-family:"Fredoka",sans-serif;font-weight:700;color:var(--pink-d);font-size:clamp(26px,7vw,40px);
+  text-shadow:0 3px 0 #fff}
+.veil .small{font-weight:800;color:var(--navy);font-size:clamp(14px,3.8vw,17px)}
+.veil img{height:clamp(80px,22vh,150px);width:auto;display:none}
+.veil.over img{display:block}
+
+/* ═════════ ADAPTACIÓN ═════════ */
+@media (max-width:520px){
+  .facts{grid-template-columns:1fr 1fr}
+  .fact.place{grid-column:1/-1;border-left:0;border-top:2px solid #e6eef8;margin-top:12px;padding-top:14px}
+}
+@media (max-width:360px){
+  .actions{grid-template-columns:1fr}
+}
+@media (min-width:900px){
+  .hero{padding-top:70px}
+  .kicker{font-size:30px}
+  .play-grid{grid-template-columns:1fr 1fr}
+}
+@media (orientation:landscape) and (max-height:520px){
+  .stage{height:calc(100vh - 110px)}
+  .panel{padding:10px}
+  .hud{padding-bottom:6px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- Símbolos reutilizables -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="daisy" viewBox="0 0 40 40">
+      <g fill="#fff" stroke="#e8eef5" stroke-width="1">
+        <ellipse cx="20" cy="9" rx="5.5" ry="8"/><ellipse cx="20" cy="31" rx="5.5" ry="8"/>
+        <ellipse cx="9" cy="20" rx="8" ry="5.5"/><ellipse cx="31" cy="20" rx="8" ry="5.5"/>
+        <ellipse cx="12.2" cy="12.2" rx="5.5" ry="7.5" transform="rotate(-45 12.2 12.2)"/>
+        <ellipse cx="27.8" cy="27.8" rx="5.5" ry="7.5" transform="rotate(-45 27.8 27.8)"/>
+        <ellipse cx="27.8" cy="12.2" rx="5.5" ry="7.5" transform="rotate(45 27.8 12.2)"/>
+        <ellipse cx="12.2" cy="27.8" rx="5.5" ry="7.5" transform="rotate(45 12.2 27.8)"/>
+      </g>
+      <circle cx="20" cy="20" r="6" fill="#ffc531"/><circle cx="18" cy="18" r="2" fill="#ffe28a"/>
+    </symbol>
+    <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.8 4.5 6.6 4.5c2.2 0 3.6 1.2 5.4 3.2 1.8-2 3.2-3.2 5.4-3.2 3.8 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z"/></symbol>
+    <symbol id="sparks" viewBox="0 0 24 24"><g stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"><path d="M5 4l4 6"/><path d="M14 2v6"/><path d="M2 13h6"/></g></symbol>
+    <symbol id="cloud" viewBox="0 0 200 90"><path d="M30 80c-16 0-26-10-26-23s11-23 25-23c3-17 18-28 35-28 14 0 26 7 32 18 5-4 12-6 19-6 17 0 30 12 32 27 3-1 6-1 9-1 15 0 26 10 26 23s-11 23-26 23H30z"/></symbol>
+    <symbol id="star" viewBox="0 0 24 24"><path d="M12 2.5l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.8 6.2 20l1.4-6.4L2.7 9.2l6.5-.7z"/></symbol>
+  </defs>
+</svg>
+
+<!-- ═════════ PORTADA ═════════ -->
+<header class="hero">
+  <svg class="cloud c1" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="cloud c2" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="cloud c3" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="cloud c4" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+  <svg class="cloud c5" viewBox="0 0 200 90" aria-hidden="true"><use href="#cloud"/></svg>
+
+  <div class="garland left" aria-hidden="true"><svg viewBox="0 0 300 120">
+    <path d="M-4 8 Q150 92 304 40" fill="none" stroke="#fff" stroke-width="3"/>
+    <g stroke="#fff" stroke-width="2.5" stroke-linejoin="round">
+      <path d="M10 15 L48 30 L22 66 Z" fill="#ffd34d"/>
+      <path d="M58 33 L98 45 L70 82 Z" fill="#ff8fb4"/>
+      <path d="M110 48 L150 54 L124 92 Z" fill="#5aa6ff"/>
+      <path d="M162 55 L202 55 L180 93 Z" fill="#b9a2ff"/>
+      <path d="M214 53 L252 47 L234 86 Z" fill="#ffd34d"/>
+      <path d="M262 45 L298 36 L284 74 Z" fill="#ff8fb4"/>
+    </g></svg></div>
+  <div class="garland right" aria-hidden="true"><svg viewBox="0 0 300 120">
+    <path d="M-4 8 Q150 92 304 40" fill="none" stroke="#fff" stroke-width="3"/>
+    <g stroke="#fff" stroke-width="2.5" stroke-linejoin="round">
+      <path d="M10 15 L48 30 L22 66 Z" fill="#5aa6ff"/>
+      <path d="M58 33 L98 45 L70 82 Z" fill="#ffd34d"/>
+      <path d="M110 48 L150 54 L124 92 Z" fill="#ff8fb4"/>
+      <path d="M162 55 L202 55 L180 93 Z" fill="#5aa6ff"/>
+      <path d="M214 53 L252 47 L234 86 Z" fill="#b9a2ff"/>
+      <path d="M262 45 L298 36 L284 74 Z" fill="#ffd34d"/>
+    </g></svg></div>
+
+  <svg class="daisy-sky" style="left:7%;top:16%;--s:28px" aria-hidden="true"><use href="#daisy"/></svg>
+  <svg class="daisy-sky" style="right:8%;top:14%;--s:30px;animation-delay:-1.2s" aria-hidden="true"><use href="#daisy"/></svg>
+  <svg class="daisy-sky" style="left:12%;top:38%;--s:20px;animation-delay:-2s" aria-hidden="true"><use href="#daisy"/></svg>
+  <svg class="daisy-sky" style="right:13%;top:34%;--s:22px;animation-delay:-.6s" aria-hidden="true"><use href="#daisy"/></svg>
+  <svg class="daisy-sky" style="left:4%;top:28%;--s:16px;animation-delay:-2.8s" aria-hidden="true"><use href="#daisy"/></svg>
+
+  <div class="hero-copy">
+    <p class="kicker disp">Esta aventura se llama…</p>
+    <h1 class="title disp" aria-label="Majo cumple 1">
+      <svg class="heart-top" viewBox="0 0 24 24" fill="#ff4f8b" aria-hidden="true"><use href="#heart"/></svg>
+      <span class="t-majo">Majo</span>
+      <span class="t-cumple">cumple</span>
+      <span class="t-one">1</span>
+    </h1>
+    <div><p class="ribbon disp">
+      <svg viewBox="0 0 24 24" fill="#fff1b8" aria-hidden="true"><use href="#heart"/></svg>
+      Ven a celebrar su primer añito
+      <svg viewBox="0 0 24 24" fill="#fff1b8" aria-hidden="true"><use href="#heart"/></svg>
+    </p></div>
+  </div>
+
+  <div class="scene">
+    <img class="landscape" src="assets/backgrounds/paisaje-portada.png" alt="" onerror="this.classList.add('slot-missing')">
+    <img class="pair" src="assets/characters/pareja-fiesta.png" alt="Personajes festejando con gorritos de fiesta" onerror="this.classList.add('slot-missing')">
+  </div>
+  <div class="edge bottom" style="--c:var(--cream)"></div>
+</header>
+
+<!-- ═════════ CUENTA REGRESIVA ═════════ -->
+<section class="countdown" aria-labelledby="t-cd">
+  <div class="wrap">
+    <h2 id="t-cd" class="sec-title disp">
+      <svg style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg>
+      Cuenta regresiva
+      <svg style="color:var(--yellow)" aria-hidden="true"><use href="#sparks"/></svg>
+    </h2>
+    <div class="cd" id="cd" role="timer" aria-live="off">
+      <div class="cd-card c-blue"><div class="n" id="cd-d">--</div><div class="l">Días</div>
+        <svg aria-hidden="true"><use href="#daisy"/></svg></div>
+      <div class="cd-card c-pink"><div class="n" id="cd-h">--</div><div class="l">Horas</div>
+        <svg fill="#ff6f9f" aria-hidden="true"><use href="#heart"/></svg></div>
+      <div class="cd-card c-yel"><div class="n" id="cd-m">--</div><div class="l">Min</div>
+        <svg fill="#ffc531" aria-hidden="true"><use href="#star"/></svg></div>
+      <div class="cd-card c-lil"><div class="n" id="cd-s">--</div><div class="l">Seg</div>
+        <svg fill="#b9a2ff" aria-hidden="true"><use href="#star"/></svg></div>
+    </div>
+    <p class="cd-done disp" id="cd-done">¡Hoy es el gran día!</p>
+  </div>
+  <div class="edge bottom" style="--c:#dff2ff"></div>
+</section>
+
+<!-- ═════════ FECHA Y LUGAR ═════════ -->
+<section class="info" aria-labelledby="t-info">
+  <div class="wrap">
+    <h2 id="t-info" class="sec-title disp">
+      <svg style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
+      Fecha y lugar
+      <svg style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
+    </h2>
+    <div class="info-card">
+      <div class="facts">
+        <div class="fact">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2f74e0" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="4"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="8.5" cy="14.5" r="1" fill="#2f74e0"/><circle cx="12" cy="14.5" r="1" fill="#2f74e0"/></svg>
+          <div><div class="k">Domingo</div><div class="v">8 de noviembre</div></div>
+        </div>
+        <div class="fact">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2f74e0" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <div><div class="k">Hora</div><div class="v">2:30 pm</div></div>
+        </div>
+        <div class="fact place">
+          <svg viewBox="0 0 24 24" fill="#2f74e0" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></svg>
+          <div><div class="k">Lugar</div><div class="v">Las Granjas 21, Trapiche, Zapotlanejo, Jal.</div></div>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-pink" href="https://maps.app.goo.gl/FQfujJxBo1FtLBTm9" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></svg>
+          Cómo llegar
+        </a>
+        <button class="btn btn-blue" id="btn-cal" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="4"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>
+          Agregar al calendario
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="edge bottom" style="--c:#fff4f0"></div>
+</section>
+
+<!-- ═════════ JUEGO ═════════ -->
+<section class="play" aria-labelledby="t-play">
+  <div class="wrap play-grid">
+    <div>
+      <h2 id="t-play" class="disp">Una pequeña aventura para <em>jugar</em></h2>
+      <p>Salta los regalos y los pastelitos, atrapa globos y ayúdanos a llegar a la fiesta.</p>
+      <button class="btn btn-yel" id="btn-play" type="button">
+        <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 7h10a5 5 0 0 1 4.8 6.4l-1 3.4a2.6 2.6 0 0 1-4.4 1.1L14.6 16H9.4l-1.8 1.9a2.6 2.6 0 0 1-4.4-1.1l-1-3.4A5 5 0 0 1 7 7zm1 3v1.5H6.5v1.5H8v1.5h1.5V13H11v-1.5H9.5V10zm8.2.3a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
+        Jugar
+      </button>
+    </div>
+    <div class="play-art">
+      <img src="assets/characters/pareja-globos.png" alt="Personajes con globos de colores" onerror="this.classList.add('slot-missing')">
+    </div>
+  </div>
+  <div class="meadow-wrap"><img class="meadow" src="assets/backgrounds/pradera-juego.png" alt="" onerror="this.classList.add('slot-missing')"></div>
+  <div class="edge bottom" style="--c:#ffe6ef"></div>
+</section>
+
+<!-- ═════════ CONFIRMACIÓN ═════════ -->
+<section class="rsvp" aria-labelledby="t-rsvp">
+  <div class="wrap">
+    <h2 id="t-rsvp" class="sec-title disp">
+      <svg style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
+      Confirma tu asistencia
+      <svg style="color:var(--pink)" aria-hidden="true"><use href="#sparks"/></svg>
+    </h2>
+    <p class="lead">Nos encantaría compartir este día tan especial contigo. ¡Te esperamos!</p>
+    <form class="form" id="rsvp" novalidate>
+      <label for="f-name">Tu nombre</label>
+      <input class="field" id="f-name" name="nombre" type="text" autocomplete="name" placeholder="Nombre y apellido" required>
+      <label for="f-count">¿Cuántos asisten?</label>
+      <div class="select-wrap">
+        <select class="field" id="f-count" name="personas" required>
+          <option value="" selected disabled>Selecciona</option>
+          <option value="1">1 persona</option><option value="2">2 personas</option>
+          <option value="3">3 personas</option><option value="4">4 personas</option>
+          <option value="5">5 personas</option><option value="6">6 personas</option>
+        </select>
+      </div>
+      <button class="btn btn-pink" type="submit">
+        <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><use href="#heart"/></svg>
+        Confirmar por WhatsApp
+      </button>
+      <p class="form-msg" id="form-msg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <svg viewBox="0 0 24 24" fill="#ff8fb4" aria-hidden="true"><use href="#heart"/></svg>
+  Creado por Celayre · <a href="https://celayre.com" target="_blank" rel="noopener">celayre.com</a>
+  <svg viewBox="0 0 24 24" fill="#ff8fb4" aria-hidden="true"><use href="#heart"/></svg>
+</footer>
+
+<!-- ═════════ MODAL DEL JUEGO ═════════ -->
+<div class="game" id="game" role="dialog" aria-modal="true" aria-labelledby="g-title">
+  <div class="panel">
+    <div class="hud">
+      <span class="disp" id="g-title">¡A la fiesta!</span>
+      <div class="scores"><span class="chip">⭐ <b id="g-score">0</b></span><span class="chip b">Récord <b id="g-best">0</b></span></div>
+      <button class="close" id="g-close" type="button" aria-label="Cerrar juego">×</button>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="canvas"></canvas>
+      <div class="veil" id="veil">
+        <img id="veil-img" alt="">
+        <div class="big" id="veil-big">¡Toca para saltar!</div>
+        <div class="small" id="veil-small">Mantén presionado para saltar más alto</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ════════ DATOS DEL EVENTO (edita aquí) ════════ */
+var EVENTO = {
+  nombre: "Cumpleaños de Majo",
+  inicio: "2026-11-08T14:30:00-06:00",   // Jalisco: UTC-6 todo el año
+  fin:    "2026-11-08T19:30:00-06:00",
+  lugar:  "Las Granjas 21, Trapiche, 45430 Zapotlanejo, Jal.",
+  mapa:   "https://maps.app.goo.gl/FQfujJxBo1FtLBTm9",
+  whatsapp: "523331419393"
+};
+
+/* ════════ CUENTA REGRESIVA ════════ */
+(function(){
+  var target = new Date(EVENTO.inicio).getTime();
+  var el = { d:document.getElementById('cd-d'), h:document.getElementById('cd-h'),
+             m:document.getElementById('cd-m'), s:document.getElementById('cd-s') };
+  function pad(n){ return n < 10 ? '0'+n : ''+n; }
+  function tick(){
+    var diff = target - Date.now();
+    if (diff <= 0){
+      document.getElementById('cd').style.display = 'none';
+      document.getElementById('cd-done').style.display = 'block';
+      return;
+    }
+    var s = Math.floor(diff/1000);
+    el.d.textContent = pad(Math.floor(s/86400));
+    el.h.textContent = pad(Math.floor(s%86400/3600));
+    el.m.textContent = pad(Math.floor(s%3600/60));
+    el.s.textContent = pad(s%60);
+    setTimeout(tick, 1000 - (Date.now()%1000));
+  }
+  tick();
+})();
+
+/* ════════ AGREGAR AL CALENDARIO ════════ */
+(function(){
+  function utc(iso){ return new Date(iso).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''); }
+  var detalles = "¡Ven a celebrar el primer añito de Majo! Cómo llegar: " + EVENTO.mapa;
+  document.getElementById('btn-cal').addEventListener('click', function(){
+    var isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && !/Android/.test(navigator.userAgent);
+    if (isApple){
+      var ics = [
+        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Celayre//Invitacion//ES','CALSCALE:GREGORIAN','METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        'UID:majo-cumple-1-20261108@celayre.com',
+        'DTSTAMP:' + utc(new Date().toISOString()),
+        'DTSTART:' + utc(EVENTO.inicio),
+        'DTEND:' + utc(EVENTO.fin),
+        'SUMMARY:' + EVENTO.nombre,
+        'LOCATION:' + EVENTO.lugar.replace(/,/g,'\\,'),
+        'DESCRIPTION:' + detalles.replace(/,/g,'\\,'),
+        'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Mañana es el cumple de Majo','END:VALARM',
+        'END:VEVENT','END:VCALENDAR'
+      ].join('\r\n');
+      var url = URL.createObjectURL(new Blob([ics], {type:'text/calendar;charset=utf-8'}));
+      var a = document.createElement('a');
+      a.href = url; a.download = 'cumple-majo.ics';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+    } else {
+      var g = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+        + '&text=' + encodeURIComponent(EVENTO.nombre)
+        + '&dates=' + utc(EVENTO.inicio) + '/' + utc(EVENTO.fin)
+        + '&location=' + encodeURIComponent(EVENTO.lugar)
+        + '&details=' + encodeURIComponent(detalles);
+      window.open(g, '_blank', 'noopener');
+    }
+  });
+})();
+
+/* ════════ CONFIRMACIÓN POR WHATSAPP ════════ */
+(function(){
+  var form = document.getElementById('rsvp');
+  var msg = document.getElementById('form-msg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var nombre = form.nombre.value.trim();
+    var n = form.personas.value;
+    if (!nombre){ msg.textContent = 'Escribe tu nombre para confirmar.'; form.nombre.focus(); return; }
+    if (!n){ msg.textContent = 'Elige cuántas personas asisten.'; form.personas.focus(); return; }
+    msg.textContent = '';
+    var texto = '¡Hola! Soy ' + nombre + ' y confirmo mi asistencia al cumple de Majo 🎉\n'
+              + 'Asistiremos: ' + n + (n === '1' ? ' persona' : ' personas') + '.';
+    window.location.href = 'https://wa.me/' + EVENTO.whatsapp + '?text=' + encodeURIComponent(texto);
+  });
+})();
+
+/* ════════ EL JUEGO ════════ */
+(function(){
+  var modal = document.getElementById('game');
+  var stage = document.getElementById('stage');
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var veil = document.getElementById('veil');
+  var veilBig = document.getElementById('veil-big');
+  var veilSmall = document.getElementById('veil-small');
+  var veilImg = document.getElementById('veil-img');
+  var scoreEl = document.getElementById('g-score');
+  var bestEl = document.getElementById('g-best');
+
+  /* — Carga y empareja sprites: recorta al dibujo y mide — */
+  function trim(img){
+    var c = document.createElement('canvas');
+    c.width = img.naturalWidth; c.height = img.naturalHeight;
+    var x = c.getContext('2d'); x.drawImage(img,0,0);
+    try{
+      var d = x.getImageData(0,0,c.width,c.height).data;
+      var minX=c.width, minY=c.height, maxX=-1, maxY=-1;
+      for (var y=0; y<c.height; y+=2) for (var i=0; i<c.width; i+=2){
+        if (d[(y*c.width+i)*4+3] > 12){
+          if (i<minX) minX=i; if (i>maxX) maxX=i; if (y<minY) minY=y; if (y>maxY) maxY=y;
+        }
+      }
+      if (maxX < 0) return c;
+      var w = maxX-minX+2, h = maxY-minY+2;
+      var o = document.createElement('canvas'); o.width=w; o.height=h;
+      o.getContext('2d').drawImage(c, minX, minY, w, h, 0, 0, w, h);
+      return o;
+    }catch(e){ return c; }   // si se abre como archivo local, usa la imagen completa
+  }
+  var SPR = {};
+  function load(key, src){
+    var img = new Image();
+    img.onload = function(){ SPR[key] = trim(img); if (key==='mareado') veilImg.src = src; };
+    img.src = src;
+  }
+  load('corre1','assets/game/jugador-corre-1.png');
+  load('corre2','assets/game/jugador-corre-2.png');
+  load('salta','assets/game/jugador-salta.png');
+  load('mareado','assets/game/jugador-mareado.png');
+  var meadow = new Image(); meadow.src = 'assets/backgrounds/pradera-juego.png';
+
+  /* — Escenario — */
+  var W=0, H=0, GROUND=0, PH=80, MH=0, dpr=1;
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio||1, 2);
+    W = stage.clientWidth; H = stage.clientHeight;
+    canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    MH = H*.62;
+    GROUND = H - MH*.14;                 /* línea del pasto dentro de la pradera */
+    PH = Math.max(58, Math.min(130, H*.27));
+  }
+  window.addEventListener('resize', function(){ if (modal.classList.contains('open')) resize(); });
+
+  var best = 0;
+  try{ best = parseInt(localStorage.getItem('majo-cumple-1-record')||'0',10)||0; }catch(e){}
+  bestEl.textContent = best;
+
+  var state='ready', raf=0, last=0;
+  var p, obs, balloons, bits, clouds, speed, dist, gap, bGap, score, t;
+
+  function reset(){
+    p = { x:0, y:0, vy:0, ground:true };
+    obs=[]; balloons=[]; bits=[];
+    clouds=[{x:W*.2,y:H*.14,s:1},{x:W*.65,y:H*.08,s:.7},{x:W*1.05,y:H*.22,s:.85}];
+    speed = H*1.35; dist=0; gap = W*.7; bGap = W*.9; score=0; t=0;
+    scoreEl.textContent='0';
+  }
+
+  function jump(){
+    if (state==='ready' || state==='over'){
+      if (state==='over') reset();
+      state='play'; veil.classList.add('hidden'); veil.classList.remove('over');
+    }
+    if (p.ground){
+      p.vy = -H*2.65; p.ground=false;
+      for (var i=0;i<7;i++) bits.push({x:p.x+PH*.3,y:GROUND,vx:-40-Math.random()*120,vy:-Math.random()*180,r:2+Math.random()*3,c:['#ffc531','#ff8fb4','#5aa6ff'][i%3],life:.6});
+    }
+  }
+  function release(){ if (p.vy < -H*1.05) p.vy = -H*1.05; }
+
+  stage.addEventListener('pointerdown', function(e){ e.preventDefault(); jump(); });
+  stage.addEventListener('pointerup', release);
+  stage.addEventListener('pointercancel', release);
+  window.addEventListener('keydown', function(e){
+    if (!modal.classList.contains('open')) return;
+    if (e.code==='Space' || e.code==='ArrowUp'){ e.preventDefault(); if(!e.repeat) jump(); }
+    if (e.code==='Escape') close();
+  });
+  window.addEventListener('keyup', function(e){ if (e.code==='Space'||e.code==='ArrowUp') release(); });
+
+  /* — Dibujos hechos en código — */
+  function rr(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+  function gift(o){
+    var x=o.x, y=GROUND-o.h, w=o.w, h=o.h;
+    ctx.fillStyle=o.c1; rr(x,y+h*.22,w,h*.78,6); ctx.fill();
+    ctx.fillStyle=o.c2; rr(x-3,y+h*.12,w+6,h*.22,5); ctx.fill();
+    ctx.fillStyle='#fff'; ctx.fillRect(x+w*.42,y+h*.12,w*.16,h*.88);
+    ctx.beginPath(); ctx.ellipse(x+w*.34,y+h*.08,w*.17,h*.1,-.5,0,7); ctx.ellipse(x+w*.66,y+h*.08,w*.17,h*.1,.5,0,7); ctx.fill();
+  }
+  function cake(o){
+    var x=o.x, w=o.w, h=o.h, b=GROUND;
+    ctx.fillStyle='#ffd3e1'; rr(x,b-h*.5,w,h*.5,8); ctx.fill();
+    ctx.fillStyle='#fff'; rr(x-2,b-h*.56,w+4,h*.14,7); ctx.fill();
+    ctx.fillStyle='#ff8fb4'; rr(x+w*.15,b-h*.86,w*.7,h*.32,7); ctx.fill();
+    ctx.fillStyle='#fff'; rr(x+w*.13,b-h*.9,w*.74,h*.1,5); ctx.fill();
+    ctx.fillStyle='#5aa6ff'; ctx.fillRect(x+w*.47,b-h*1.06,w*.06,h*.16);
+    ctx.fillStyle='#ffc531'; ctx.beginPath(); ctx.ellipse(x+w*.5,b-h*1.1,w*.05,h*.06,0,0,7); ctx.fill();
+  }
+  function balloon(b){
+    ctx.strokeStyle='rgba(51,69,107,.35)'; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(b.x,b.y+b.r*1.1); ctx.quadraticCurveTo(b.x+6,b.y+b.r*1.8,b.x,b.y+b.r*2.5); ctx.stroke();
+    ctx.fillStyle=b.c; ctx.beginPath(); ctx.ellipse(b.x,b.y,b.r*.85,b.r,0,0,7); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.6)'; ctx.beginPath(); ctx.ellipse(b.x-b.r*.3,b.y-b.r*.35,b.r*.18,b.r*.28,-.4,0,7); ctx.fill();
+  }
+  function cloud(c){
+    var s=c.s*H/320; ctx.fillStyle='rgba(255,255,255,.95)'; ctx.beginPath();
+    ctx.arc(c.x,c.y,22*s,0,7); ctx.arc(c.x+24*s,c.y-10*s,28*s,0,7); ctx.arc(c.x+52*s,c.y,22*s,0,7);
+    ctx.rect(c.x,c.y,52*s,20*s); ctx.fill();
+  }
+  function sprite(key, x, h){
+    var s = SPR[key] || SPR.corre1;
+    if (!s){ ctx.fillStyle='#5aa6ff'; rr(x, GROUND-h+p.y, h*.8, h, 18); ctx.fill(); return h*.8; }
+    var w = h * s.width / s.height;
+    ctx.drawImage(s, x, GROUND - h + p.y, w, h);
+    return w;
+  }
+
+  /* — Bucle — */
+  function frame(now){
+    raf = requestAnimationFrame(frame);
+    var dt = Math.min(.033, (now-last)/1000 || 0); last = now;
+    if (state==='play') update(dt);
+    draw();
+  }
+  function update(dt){
+    t+=dt; speed += H*.025*dt; dist += speed*dt;
+    p.vy += H*7.6*dt; p.y += p.vy*dt;
+    if (p.y >= 0){ p.y=0; p.vy=0; p.ground=true; }
+
+    gap -= speed*dt;
+    if (gap <= 0){
+      var big = Math.random() < .45;
+      var h = PH*(big? .52 : .4), w = h*(big? .9 : 1.05);
+      obs.push({ x:W+10, w:w, h:h, k: Math.random()<.5?'gift':'cake',
+                 c1:['#5aa6ff','#b9a2ff','#ffc531'][Math.floor(Math.random()*3)], c2:'#ff8fb4' });
+      gap = W*(.42 + Math.random()*.38) + speed*.18;
+    }
+    bGap -= speed*dt;
+    if (bGap <= 0){
+      balloons.push({ x:W+20, y:GROUND - PH*(1.25+Math.random()*.6), r:PH*.17,
+                      c:['#ff8fb4','#5aa6ff','#ffd34d'][Math.floor(Math.random()*3)], ph:Math.random()*6 });
+      bGap = W*(.8 + Math.random()*.9);
+    }
+    for (var i=obs.length-1;i>=0;i--){ obs[i].x -= speed*dt; if (obs[i].x < -obs[i].w-20) obs.splice(i,1); }
+    for (i=balloons.length-1;i>=0;i--){ var b=balloons[i]; b.x -= speed*dt; b.ph+=dt*3; b.y += Math.sin(b.ph)*.4; if (b.x<-40) balloons.splice(i,1); }
+    for (i=0;i<clouds.length;i++){ clouds[i].x -= speed*.12*dt; if (clouds[i].x < -100) clouds[i].x = W + Math.random()*60; }
+    for (i=bits.length-1;i>=0;i--){ var q=bits[i]; q.x+=q.vx*dt; q.y+=q.vy*dt; q.vy+=500*dt; q.life-=dt; if(q.life<=0) bits.splice(i,1); }
+
+    // colisiones
+    var pw = PH*.8, px = p.x, py = GROUND-PH+p.y;
+    var hb = { l:px+pw*.25, r:px+pw*.75, t:py+PH*.2, b:py+PH*.95 };
+    for (i=0;i<obs.length;i++){
+      var o=obs[i], ol=o.x+o.w*.15, orr=o.x+o.w*.85, ot=GROUND-o.h*.85;
+      if (hb.r>ol && hb.l<orr && hb.b>ot){ gameOver(); return; }
+    }
+    for (i=balloons.length-1;i>=0;i--){
+      var bb=balloons[i];
+      if (bb.x>hb.l-bb.r && bb.x<hb.r+bb.r && bb.y>hb.t-bb.r && bb.y<hb.b){
+        score += 10;
+        for (var k=0;k<10;k++) bits.push({x:bb.x,y:bb.y,vx:(Math.random()-.5)*260,vy:(Math.random()-.8)*220,r:2+Math.random()*3,c:bb.c,life:.7});
+        balloons.splice(i,1);
+      }
+    }
+    var shown = Math.floor(dist/(H*.35)) + score;
+    scoreEl.textContent = shown; p.shown = shown;
+  }
+  function draw(){
+    var g = ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#a9dcff'); g.addColorStop(1,'#eaf8ff');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    for (var i=0;i<clouds.length;i++) cloud(clouds[i]);
+
+    // pradera desplazándose (se repite en espejo para no notar el corte)
+    if (meadow.complete && meadow.naturalWidth){
+      var mh = MH, mw = mh*meadow.naturalWidth/meadow.naturalHeight;
+      var off = -((dist*.55) % (mw*2));
+      for (var x=off; x<W; x+=mw*2){
+        ctx.drawImage(meadow, x, H-mh*.965, mw, mh);
+        ctx.save(); ctx.translate(x+mw*2, 0); ctx.scale(-1,1);
+        ctx.drawImage(meadow, 0, H-mh*.965, mw, mh); ctx.restore();
+      }
+    } else {
+      ctx.fillStyle='#bfe28a'; ctx.fillRect(0,GROUND,W,H-GROUND);
+    }
+    ctx.fillStyle='rgba(120,180,80,.18)'; ctx.fillRect(0,GROUND+2,W,3);
+
+    for (i=0;i<balloons.length;i++) balloon(balloons[i]);
+    for (i=0;i<obs.length;i++){ obs[i].k==='gift' ? gift(obs[i]) : cake(obs[i]); }
+
+    // sombra del jugador
+    ctx.fillStyle='rgba(40,80,40,.15)';
+    var sh = 1 + p.y/(H*.6);
+    ctx.beginPath(); ctx.ellipse(p.x+PH*.42, GROUND+2, PH*.34*sh, PH*.06*sh, 0,0,7); ctx.fill();
+
+    p.x = Math.max(24, W*.12);
+    if (state==='over') sprite('mareado', p.x, PH*1.02);
+    else if (!p.ground) sprite('salta', p.x, PH);
+    else sprite(Math.floor(t/.11)%2 ? 'corre2':'corre1', p.x, PH);
+
+    for (i=0;i<bits.length;i++){ var q=bits[i]; ctx.globalAlpha=Math.max(0,q.life/.7); ctx.fillStyle=q.c; ctx.beginPath(); ctx.arc(q.x,q.y,q.r,0,7); ctx.fill(); }
+    ctx.globalAlpha=1;
+  }
+  function gameOver(){
+    state='over';
+    if (navigator.vibrate) try{ navigator.vibrate(60); }catch(e){}
+    var s = p.shown||0;
+    if (s > best){ best = s; bestEl.textContent = best; try{ localStorage.setItem('majo-cumple-1-record', best); }catch(e){} }
+    veilBig.textContent = s >= 100 ? '¡Wow, ' + s + ' puntos!' : '¡Ups! ' + s + ' puntos';
+    veilSmall.textContent = 'Toca para jugar otra vez';
+    veil.classList.add('over'); veil.classList.remove('hidden');
+  }
+
+  function open(){
+    modal.classList.add('open'); document.body.style.overflow='hidden';
+    requestAnimationFrame(function(){
+      resize(); reset(); state='ready';
+      veilBig.textContent='¡Toca para saltar!'; veilSmall.textContent='Mantén presionado para saltar más alto';
+      veil.classList.remove('hidden','over');
+      last=performance.now(); cancelAnimationFrame(raf); raf=requestAnimationFrame(frame);
+      document.getElementById('g-close').focus();
+    });
+  }
+  function close(){
+    modal.classList.remove('open'); document.body.style.overflow='';
+    cancelAnimationFrame(raf); state='ready';
+    document.getElementById('btn-play').focus();
+  }
+  document.getElementById('btn-play').addEventListener('click', open);
+  document.getElementById('g-close').addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if (e.target===modal) close(); });
+})();
+</script>
+</body>
+</html>
